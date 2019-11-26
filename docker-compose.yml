@@ -1,0 +1,59 @@
+version: "3.5"
+
+networks:
+  localdev:
+    name: localdev
+
+services:
+  server:
+    build: ./server
+    image: one/server
+    container_name: server
+    ports:
+      - "80:80"
+    volumes:
+      - ./server/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - localdev
+
+  frontend:
+    build: frontend/
+    image: one/frontend
+    container_name: frontend
+    restart: always
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
+    networks:
+      - localdev
+
+  backend:
+    build: backend/
+    image: one/backend
+    container_name: backend
+    restart: always
+    volumes:
+      - ./backend:/app
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    depends_on:
+      - db
+    networks:
+      - localdev
+
+  db:
+    image: postgres
+    container_name: database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
