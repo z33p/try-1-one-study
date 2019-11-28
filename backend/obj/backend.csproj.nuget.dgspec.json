@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/app/backend.csproj": {}
+    "/home/z33p/prod/one-study/backend/backend.csproj": {}
   },
   "projects": {
-    "/app/backend.csproj": {
+    "/home/z33p/prod/one-study/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/app/backend.csproj",
+        "projectUniqueName": "/home/z33p/prod/one-study/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "/app/backend.csproj",
-        "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/app/obj/",
+        "projectPath": "/home/z33p/prod/one-study/backend/backend.csproj",
+        "packagesPath": "/home/z33p/.nuget/packages/",
+        "outputPath": "/home/z33p/prod/one-study/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/root/.nuget/NuGet/NuGet.Config"
+          "/home/z33p/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -77,6 +77,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"

@@ -37,17 +37,12 @@ services:
     image: one/backend
     container_name: backend
     restart: always
-    volumes:
-      - ./backend:/app
-    ports:
-      - "5000:5000"
-      - "5001:5001"
     depends_on:
-      - db
+      - database
     networks:
       - localdev
 
-  db:
+  database:
     image: postgres
     container_name: database
     environment:
@@ -55,7 +50,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     ports:
-      - "5432:5432"
+      - "5432:5430"
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     networks:
