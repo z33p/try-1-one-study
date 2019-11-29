@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using AuthServer.Helpers;
 using AuthServer.Services;
-using AuthServer.Models;
 using AuthServer.Data;
 
 namespace AuthServer
@@ -59,7 +58,7 @@ namespace AuthServer
         {
           ValidateIssuerSigningKey = true,
           IssuerSigningKey = new SymmetricSecurityKey(key),
-          ValidateIssuer = false,
+          ValidateIssuer = true,
           ValidateAudience = false
         };
       });

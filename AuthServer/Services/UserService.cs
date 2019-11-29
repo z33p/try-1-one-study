@@ -44,14 +44,17 @@ namespace AuthServer.Services
 
       // authentication successful so generate jwt token
       var tokenHandler = new JwtSecurityTokenHandler();
-      var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+      // var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+      var key = Encoding.ASCII.GetBytes("###### Eu sou o Douglas #######");
       var tokenDescriptor = new SecurityTokenDescriptor
       {
         Subject = new ClaimsIdentity(new Claim[]
           {
                     new Claim(ClaimTypes.Name, user.Id.ToString())
           }),
-        Expires = DateTime.UtcNow.AddDays(7),
+        Issuer = "z33p@AuthServer",
+        Audience = "https://localhost",
+        Expires = DateTime.UtcNow.AddHours(2),
         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
       };
       var token = tokenHandler.CreateToken(tokenDescriptor);
