@@ -9,6 +9,7 @@ services:
     build: ./server
     image: one/server
     container_name: server
+    restart: always
     ports:
       - "80:80"
     volumes:
@@ -16,6 +17,7 @@ services:
     depends_on:
       - frontend
       - backend
+      - auth_server
     networks:
       - localdev
 
@@ -36,22 +38,40 @@ services:
     build: backend/
     image: one/backend
     container_name: backend
-    restart: always
     depends_on:
-      - database
+      - backend_db
     networks:
       - localdev
 
-  database:
+  backend_db:
     image: postgres
-    container_name: database
+    container_name: backend_db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-    ports:
-      - "5432:5430"
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - ./backend/server_data:/var/lib/postgresql/data
+    networks:
+      - localdev
+
+  auth_server:
+    build: AuthServer/
+    image: one/auth_server
+    container_name: auth_server
+    depends_on:
+      - auth_server_db
+    networks:
+      - localdev
+
+  auth_server_db:
+    image: postgres
+    container_name: auth_server_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./AuthServer/server_data:/var/lib/postgresql/data
     networks:
       - localdev

@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,7 +9,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using AuthServer.Helpers;
-using AuthServer.Services;
 using AuthServer.Data;
 
 namespace AuthServer
@@ -42,29 +42,28 @@ namespace AuthServer
       var appSettingsSection = Configuration.GetSection("AppSettings");
       services.Configure<AppSettings>(appSettingsSection);
 
-      // configure jwt authentication
-      var appSettings = appSettingsSection.Get<AppSettings>();
-      var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+      // JWT
+      var _appSettings = appSettingsSection.Get<AppSettings>();
+      var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+
       services.AddAuthentication(x =>
       {
         x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-      })
-      .AddJwtBearer(x =>
+      }).AddJwtBearer(x =>
       {
-        x.RequireHttpsMetadata = false;
+        // x.RequireHttpsMetadata = true;
         x.SaveToken = true;
         x.TokenValidationParameters = new TokenValidationParameters
         {
           ValidateIssuerSigningKey = true,
           IssuerSigningKey = new SymmetricSecurityKey(key),
           ValidateIssuer = true,
-          ValidateAudience = false
+          ValidateAudience = true,
+          ValidAudience = _appSettings.Audience,
+          ValidIssuer = _appSettings.Issuer
         };
       });
-
-      // configure DI for application services
-      services.AddScoped<IUserService, UserService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,26 +10,27 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using AuthServer.Models;
+using AuthServer.Helpers;
 
 namespace AuthServer.Controllers
 {
   [ApiController]
-  [Route("[controller]")]
+  [Route("/")]
   public class AuthController : Controller
   {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly IConfiguration _config;
+    private readonly AppSettings _appSettings;
 
     public AuthController(
       UserManager<IdentityUser> userManager,
       SignInManager<IdentityUser> signInManager,
-      IConfiguration config
+      IOptions<AppSettings> appSettings
     )
     {
       _userManager = userManager;
       _signInManager = signInManager;
-      _config = config;
+      _appSettings = appSettings.Value;
     }
 
     [HttpPost("login")]
@@ -46,7 +47,10 @@ namespace AuthServer.Controllers
       if (!signInResult.Succeeded)
         return BadRequest("Usuário ou senha inválidos");
 
-      return Ok(await yieldToken(user, client.Email));
+      return Ok(new Token
+      {
+        token = await generateToken(user, client.Email)
+      });
     }
 
     [HttpPost("register")]
@@ -64,10 +68,13 @@ namespace AuthServer.Controllers
 
       await _signInManager.SignInAsync(user, false);
 
-      return Ok(await yieldToken(user, client.Email));
+      return Ok(new Token
+      {
+        token = await generateToken(user, client.Email)
+      });
     }
 
-    public async Task<string> yieldToken(IdentityUser user, string email)
+    public async Task<string> generateToken(IdentityUser user, string email)
     {
       var identityClaims = new ClaimsIdentity();
       identityClaims.AddClaims(await _userManager.GetClaimsAsync(user));
@@ -75,21 +82,21 @@ namespace AuthServer.Controllers
       // authentication successful so generate jwt token
       var tokenHandler = new JwtSecurityTokenHandler();
 
-      var key = Encoding.ASCII.GetBytes(_config["AppSettings:Secret"]);
+      var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
       var tokenDescriptor = new SecurityTokenDescriptor
       {
-        Subject = new ClaimsIdentity(new Claim[]
-          {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-          }),
-        Issuer = _config["AppSettings:Issuer"],
-        Audience = _config["AppSettings:Audience"],
-        Expires = DateTime.UtcNow.AddHours(Convert.ToDouble(_config["AppSettings:ExpiresInHours"])),
+        Subject = new ClaimsIdentity(
+          new Claim[]{
+            new Claim(ClaimTypes.Name, user.Id.ToString())
+            }
+          ),
+        Issuer = _appSettings.Issuer,
+        Audience = _appSettings.Audience,
+        Expires = DateTime.UtcNow.AddHours(Convert.ToDouble(_appSettings.ExpiresInHours)),
         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
       };
 
       return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
     }
-
   }
 }

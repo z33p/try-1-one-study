@@ -14,7 +14,5 @@ namespace AuthServer.Models
     [Required]
     public string Password { get; set; }
 
-    // [Compare("Password")]
-    // public string ConfirmPassword { get; set; }
   }
 }
