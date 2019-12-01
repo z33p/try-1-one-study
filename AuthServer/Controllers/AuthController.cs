@@ -87,7 +87,7 @@ namespace AuthServer.Controllers
       {
         Subject = new ClaimsIdentity(
           new Claim[]{
-            new Claim(ClaimTypes.Name, user.Id.ToString())
+            new Claim(ClaimTypes.Name, user.Id)
             }
           ),
         Issuer = _appSettings.Issuer,

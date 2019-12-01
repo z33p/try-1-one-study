@@ -1,19 +1,12 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0 as build
+FROM node:alpine
 
-ARG BUILDCONFIG=RELEASE
-ARG VERSION=1.0.0
-
-COPY backend.csproj /build/
-
-RUN dotnet restore ./build/backend.csproj
-
-COPY . ./build/
-WORKDIR /build/
-RUN dotnet publish ./backend.csproj -c $BUILDCONFIG -o out /p:Version=$VERSION
-
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0
 WORKDIR /app
 
-COPY --from=build /build/out .
+COPY package.json ./
+COPY yarn.lock ./
 
-CMD ["dotnet", "backend.dll"] 
+RUN yarn
+
+COPY . ./
+
+CMD ["yarn", "dev"]

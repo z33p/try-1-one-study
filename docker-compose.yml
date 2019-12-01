@@ -29,8 +29,6 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    ports:
-      - "3000:3000"
     networks:
       - localdev
 
@@ -38,6 +36,10 @@ services:
     build: backend/
     image: one/backend
     container_name: backend
+    restart: always
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
     depends_on:
       - backend_db
     networks:
