@@ -5,11 +5,15 @@ module.exports = {
   async index(req, res) {
     const { board_id } = req.params;
 
-    const board = await Board.findByPk(board_id);
+    const board = await Board.findByPk(board_id, {
+      where: {
+        user_id: req.user.unique_name
+      }
+    });
 
     if (!board) return res.status(404).json({ error: "board not found" });
 
-    return board;
+    return res.json(board);
   },
   async allByUser(req, res) {
     const user_id = req.user.unique_name;
@@ -40,6 +44,6 @@ module.exports = {
       user_id
     });
 
-    return res.json(board);
+    return res.status(201).json(board);
   }
 };

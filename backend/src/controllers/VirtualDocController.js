@@ -44,6 +44,6 @@ module.exports = {
       user_id
     });
 
-    return res.json(virtual_doc);
+    return res.status(201).json(virtual_doc);
   }
 };
