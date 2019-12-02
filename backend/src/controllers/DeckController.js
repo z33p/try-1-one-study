@@ -9,7 +9,7 @@ module.exports = {
 
     if (!deck) return res.status(404).json({ error: "deck not found" });
 
-    return deck;
+    return res.json(deck);
   },
   async allByUser(req, res) {
     const user_id = req.user.unique_name;
@@ -40,6 +40,6 @@ module.exports = {
       user_id
     });
 
-    return res.json(deck);
+    return res.status(201).json(deck);
   }
 };

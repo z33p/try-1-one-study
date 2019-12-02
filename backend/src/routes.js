@@ -12,26 +12,28 @@ routes.get("/", (req, res) => {
   return res.json({ hello: "world" });
 });
 
-routes.get("/user", UserController.index);
 routes.get("/users", UserController.all);
 routes.post("/users", UserController.store);
+routes.get("/users/:user_id", UserController.index);
 
-routes.get("/virtual_doc", VirtualDocController.index);
-routes.get("/virtual_docs", VirtualDocController.allByUser);
 routes.post("/virtual_docs", VirtualDocController.store);
+routes.get("/virtual_docs", VirtualDocController.allByUser);
+routes.get("/virtual_docs/:vDoc_id", VirtualDocController.index);
 
-routes.get("/board", BoardController.index);
-routes.get("/boards", BoardController.allByUser);
 routes.post("/boards", BoardController.store);
+routes.get("/boards", BoardController.allByUser);
+routes.get("/boards/:board_id", BoardController.index);
 
-routes.get("/board/:board_id/tasks", TaskController.index);
-routes.post("/board/:board_id/tasks", TaskController.store);
+routes.get("/tasks/:task_id", TaskController.index);
+routes.post("/boards/:board_id/tasks", TaskController.store);
+routes.get("/boards/:board_id/tasks", TaskController.allByParent);
 
-routes.get("/deck", DeckController.index);
-routes.get("/decks", DeckController.allByUser);
 routes.post("/decks", DeckController.store);
+routes.get("/decks", DeckController.allByUser);
+routes.get("/decks/:deck_id", DeckController.index);
 
-routes.get("/deck/:deck_id/cards", CardController.index);
-routes.post("/deck/:deck_id/cards", CardController.store);
+routes.get("/cards/:card_id", CardController.index);
+routes.post("/decks/:deck_id/cards", CardController.store);
+routes.get("/decks/:deck_id/cards", CardController.allByParent);
 
 module.exports = routes;

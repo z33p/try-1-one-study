@@ -19,6 +19,6 @@ module.exports = {
   async store(req, res) {
     const user = await User.create({ id: req.user.unique_name });
 
-    return res.json(user);
+    return res.status(201).json(user);
   }
 };

@@ -3,6 +3,22 @@ const Deck = require("../models/Deck");
 
 module.exports = {
   async index(req, res) {
+    const { card_id } = req.params;
+
+    const card = await Card.findByPk(card_id, {
+      include: {
+        association: "deck",
+        where: {
+          user_id: req.user.unique_name
+        }
+      }
+    });
+
+    // delete card["deck"];
+
+    return res.json(card);
+  },
+  async allByParent(req, res) {
     const { deck_id } = req.params;
 
     const deck = await Deck.findByPk(deck_id, {
@@ -26,6 +42,6 @@ module.exports = {
       deck_id
     });
 
-    return res.json(card);
+    return res.status(201).json(card);
   }
 };
