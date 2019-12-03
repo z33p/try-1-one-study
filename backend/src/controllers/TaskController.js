@@ -2,23 +2,7 @@ const Board = require("../models/Board");
 const Task = require("../models/Task");
 
 module.exports = {
-  async index(req, res) {
-    const { task_id } = req.params;
-
-    const task = await Task.findByPk(task_id, {
-      include: {
-        association: "board",
-        where: {
-          user_id: req.user.unique_name
-        }
-      }
-    });
-
-    // delete task["board"];
-
-    return res.json(task);
-  },
-  async allByParent(req, res) {
+  async allByBoard(req, res) {
     const { board_id } = req.params;
 
     const board = await Board.findByPk(board_id, {

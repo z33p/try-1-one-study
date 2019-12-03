@@ -21,9 +21,7 @@ routes.get("/virtual_docs/:vDoc_id", VirtualDocController.index);
 routes.post("/boards", BoardController.store);
 routes.get("/boards", BoardController.allByUser);
 routes.get("/boards/:board_id", BoardController.index);
-
-routes.get("/tasks/:task_id", TaskController.index);
 routes.post("/boards/:board_id/tasks", TaskController.store);
-routes.get("/boards/:board_id/tasks", TaskController.allByParent);
+routes.get("/boards/:board_id/tasks", TaskController.allByBoard);
 
 module.exports = routes;
