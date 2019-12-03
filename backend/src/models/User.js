@@ -18,7 +18,6 @@ class User extends Model {
       foreignKey: "user_id",
       as: "virtual_docs"
     });
-    this.hasMany(models.Deck, { foreignKey: "user_id", as: "decks" });
     this.hasMany(models.Board, { foreignKey: "user_id", as: "boards" });
   }
 }

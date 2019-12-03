@@ -1,8 +1,6 @@
 const express = require("express");
 const UserController = require("./controllers/UserController");
 const VirtualDocController = require("./controllers/VirtualDocController");
-const DeckController = require("./controllers/DeckController");
-const CardController = require("./controllers/CardController");
 const BoardController = require("./controllers/BoardController");
 const TaskController = require("./controllers/TaskController");
 
@@ -27,13 +25,5 @@ routes.get("/boards/:board_id", BoardController.index);
 routes.get("/tasks/:task_id", TaskController.index);
 routes.post("/boards/:board_id/tasks", TaskController.store);
 routes.get("/boards/:board_id/tasks", TaskController.allByParent);
-
-routes.post("/decks", DeckController.store);
-routes.get("/decks", DeckController.allByUser);
-routes.get("/decks/:deck_id", DeckController.index);
-
-routes.get("/cards/:card_id", CardController.index);
-routes.post("/decks/:deck_id/cards", CardController.store);
-routes.get("/decks/:deck_id/cards", CardController.allByParent);
 
 module.exports = routes;
