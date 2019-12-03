@@ -28,7 +28,7 @@ module.exports = {
 
   async store(req, res) {
     const user_id = req.user.unique_name;
-    const { title, detail } = req.body;
+    const { title } = req.body;
 
     const user = await User.findByPk(user_id);
 
@@ -36,7 +36,6 @@ module.exports = {
 
     const deck = await Deck.create({
       title,
-      detail,
       user_id
     });
 
