@@ -8,7 +8,7 @@ public class FlashCardsContext : DbContext
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
-    optionsBuilder.UseNpgsql("Host=flashcards_db;Database=one-study;Username=postgres;Password=postgres");
+    optionsBuilder.UseNpgsql("Host=flashcards_db;Database=postgres;Username=postgres;Password=postgres");
   }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)

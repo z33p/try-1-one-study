@@ -6,7 +6,9 @@ namespace AuthServer.Main.Data
 {
   public class AuthServerContext : IdentityDbContext
   {
-    public AuthServerContext(DbContextOptions<AuthServerContext> options) : base(options)
-    { }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+      optionsBuilder.UseNpgsql("Host=auth_server_db;Database=postgres;Username=postgres;Password=postgres");
+    }
   }
 }

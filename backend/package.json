@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server.js --ignore __tests__",
+    "dev": "yarn sequelize db:migrate && nodemon src/server.js --ignore __tests__",
     "pretest": "NODE_ENV=test sequelize db:migrate",
     "test": "NODE_ENV=test jest --detectOpenHandles",
     "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
@@ -22,7 +22,6 @@
   "devDependencies": {
     "nodemon": "^1.19.4",
     "sequelize-cli": "^5.5.1",
-    "sqlite3": "^4.1.0",
     "supertest": "^4.0.2"
   }
 }

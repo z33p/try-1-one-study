@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using AuthServer.Main.Helpers;
 using AuthServer.Main.Data;
+using System.Linq;
 
 namespace AuthServer.Main
 {
@@ -18,6 +19,7 @@ namespace AuthServer.Main
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
+      ApplyMigrations(new AuthServerContext());
     }
 
     public IConfiguration Configuration { get; }
@@ -28,9 +30,7 @@ namespace AuthServer.Main
       services.AddCors();
       services.AddControllers();
 
-      services.AddDbContext<AuthServerContext>(
-          options => options.UseNpgsql(Configuration["ConnectionString:DefaultConnection"])
-      );
+      services.AddDbContext<AuthServerContext>();
 
       // Identity Config
       services
@@ -86,7 +86,7 @@ namespace AuthServer.Main
       });
     }
 
-    public void ApplyMigrations(ApplicationDbContext context)
+    public void ApplyMigrations(AuthServerContext context)
     {
       if (context.Database.GetPendingMigrations().Any())
       {

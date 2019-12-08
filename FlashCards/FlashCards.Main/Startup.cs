@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,6 +19,7 @@ namespace FlashCards.Main
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
+      ApplyMigrations(new FlashCardsContext());
     }
 
     public IConfiguration Configuration { get; }
@@ -48,7 +50,7 @@ namespace FlashCards.Main
         endpoints.MapControllers();
       });
     }
-    public void ApplyMigrations(ApplicationDbContext context)
+    public void ApplyMigrations(FlashCardsContext context)
     {
       if (context.Database.GetPendingMigrations().Any())
       {
