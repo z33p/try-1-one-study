@@ -77,3 +77,24 @@ services:
       - ./AuthServer/server_data:/var/lib/postgresql/data
     networks:
       - localdev
+
+  flashcards:
+    build: FlashCards/
+    image: one/flashcards
+    container_name: flashcards
+    depends_on:
+      - flashcards_db
+    networks:
+      - localdev
+
+  flashcards_db:
+    image: postgres
+    container_name: flashcards_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./FlashCards/server_data:/var/lib/postgresql/data
+    networks:
+      - localdev
