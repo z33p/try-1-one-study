@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using AuthServer.Main.Helpers;
 using AuthServer.Main.Data;
 using System.Linq;
+using AuthServer.Main.Services;
 
 namespace AuthServer.Main
 {
@@ -19,7 +20,7 @@ namespace AuthServer.Main
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
-      ApplyMigrations(new AuthServerContext());
+      ApplyMigrations(new DataContext());
     }
 
     public IConfiguration Configuration { get; }
@@ -30,12 +31,12 @@ namespace AuthServer.Main
       services.AddCors();
       services.AddControllers();
 
-      services.AddDbContext<AuthServerContext>();
+      services.AddDbContext<DataContext>();
 
       // Identity Config
       services
         .AddIdentity<IdentityUser, IdentityRole>()
-        .AddEntityFrameworkStores<AuthServerContext>()
+        .AddEntityFrameworkStores<DataContext>()
         .AddDefaultTokenProviders();
 
       // configure strongly typed settings objects
@@ -86,7 +87,7 @@ namespace AuthServer.Main
       });
     }
 
-    public void ApplyMigrations(AuthServerContext context)
+    public void ApplyMigrations(DataContext context)
     {
       if (context.Database.GetPendingMigrations().Any())
       {

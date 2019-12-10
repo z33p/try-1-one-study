@@ -1,102 +1,102 @@
-using System;
 using System.Linq;
-using System.Text;
-using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
+using AuthServer.Main.Contracts.V1;
+using AuthServer.Main.Contracts.V1.Requests;
+using AuthServer.Main.Contracts.V1.Responses;
+using AuthServer.Main.Services;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Configuration;
-using AuthServer.Main.Models;
 using AuthServer.Main.Helpers;
+using Microsoft.IdentityModel.Tokens;
+using AuthServer.Main.Data;
+using Microsoft.Extensions.Options;
 
-namespace AuthServer.Main.Controllers
+namespace AuthServer.Main.Controllers.V1
 {
-  [ApiController]
-  [Route("/")]
   public class AuthController : Controller
   {
     private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly AppSettings _appSettings;
+    private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly IOptions<AppSettings> _appSettings;
+    private readonly DataContext _context;
+    private readonly AuthService _authService;
 
-    public AuthController(
-      UserManager<IdentityUser> userManager,
-      SignInManager<IdentityUser> signInManager,
-      IOptions<AppSettings> appSettings
-    )
+    public AuthController(UserManager<IdentityUser> userManager, IOptions<AppSettings> appSettings, DataContext context, RoleManager<IdentityRole> roleManager)
     {
       _userManager = userManager;
-      _signInManager = signInManager;
-      _appSettings = appSettings.Value;
+      _appSettings = appSettings;
+      _context = context;
+      _roleManager = roleManager;
+      _authService = new AuthService(_userManager, _appSettings, _context, _roleManager);
     }
 
-    [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginViewModel client)
+
+    [HttpPost(ApiRoutes.Identity.Register)]
+    public async Task<IActionResult> Register([FromBody] UserRegistrationRequest request)
     {
-      if (!ModelState.IsValid) return BadRequest(ModelState.Values.SelectMany(e => e.Errors));
-
-      // login functionality
-      var user = await _userManager.FindByNameAsync(client.UserName);
-      if (user == null) return BadRequest("Usuário não existe");
-
-      var signInResult = await _signInManager.PasswordSignInAsync(user, client.Password, false, true);
-
-      if (!signInResult.Succeeded)
-        return BadRequest("Usuário ou senha inválidos");
-
-      return Ok(new Token
+      if (!ModelState.IsValid)
       {
-        token = await generateToken(user, client.Email)
+        return BadRequest(new AuthFailedResponse
+        {
+          Errors = ModelState.Values.SelectMany(x => x.Errors.Select(xx => xx.ErrorMessage))
+        });
+      }
+
+      var authResponse = await _authService.RegisterAsync(request.Email, request.Password);
+
+      if (!authResponse.Success)
+      {
+        return BadRequest(new AuthFailedResponse
+        {
+          Errors = authResponse.Errors
+        });
+      }
+
+      return Ok(new AuthSuccessResponse
+      {
+        Token = authResponse.Token,
+        RefreshToken = authResponse.RefreshToken
       });
     }
 
-    [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterViewModel client)
+    [HttpPost(ApiRoutes.Identity.Login)]
+    public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
     {
-      var user = new IdentityUser
+      var authResponse = await _authService.LoginAsync(request.Email, request.Password);
+
+      if (!authResponse.Success)
       {
-        UserName = client.UserName,
-        Email = "",
-      };
+        return BadRequest(new AuthFailedResponse
+        {
+          Errors = authResponse.Errors
+        });
+      }
 
-      var result = await _userManager.CreateAsync(user, client.Password);
-
-      if (!result.Succeeded) return BadRequest(result.Errors);
-
-      await _signInManager.SignInAsync(user, false);
-
-      return Ok(new Token
+      return Ok(new AuthSuccessResponse
       {
-        token = await generateToken(user, client.Email)
+        Token = authResponse.Token,
+        RefreshToken = authResponse.RefreshToken
       });
     }
 
-    public async Task<string> generateToken(IdentityUser user, string email)
+    [HttpPost(ApiRoutes.Identity.Refresh)]
+    public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request)
     {
-      var identityClaims = new ClaimsIdentity();
-      identityClaims.AddClaims(await _userManager.GetClaimsAsync(user));
+      var authResponse = await _authService.RefreshTokenAsync(request.Token, request.RefreshToken);
 
-      // authentication successful so generate jwt token
-      var tokenHandler = new JwtSecurityTokenHandler();
-
-      var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-      var tokenDescriptor = new SecurityTokenDescriptor
+      if (!authResponse.Success)
       {
-        Subject = new ClaimsIdentity(
-          new Claim[]{
-            new Claim(ClaimTypes.Name, user.Id)
-            }
-          ),
-        Issuer = _appSettings.Issuer,
-        Audience = _appSettings.Audience,
-        Expires = DateTime.UtcNow.AddHours(Convert.ToDouble(_appSettings.ExpiresInHours)),
-        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-      };
+        return BadRequest(new AuthFailedResponse
+        {
+          Errors = authResponse.Errors
+        });
+      }
 
-      return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
+      return Ok(new AuthSuccessResponse
+      {
+        Token = authResponse.Token,
+        RefreshToken = authResponse.RefreshToken
+      });
     }
   }
 }
