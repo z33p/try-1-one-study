@@ -5,17 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using FlashCards.Main.Models;
+using FlashCards.Models;
+using Microsoft.AspNetCore.Authorization;
+using FlashCards.Data;
 
-namespace FlashCards.Main.Controllers
+namespace FlashCards.Controllers
 {
+  [Authorize]
   [Route("[controller]")]
   [ApiController]
   public class DecksController : ControllerBase
   {
-    private readonly FlashCardsContext _context;
+    private readonly DataContext _context;
 
-    public DecksController(FlashCardsContext context)
+    public DecksController(DataContext context)
     {
       _context = context;
     }
@@ -70,18 +73,6 @@ namespace FlashCards.Main.Controllers
       }
 
       return NoContent();
-    }
-
-    // POST: api/Decks
-    // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-    // more details see https://aka.ms/RazorPagesCRUD.
-    [HttpPost]
-    public async Task<ActionResult<object>> PostDeck(Deck deck)
-    {
-      _context.Decks.Add(deck);
-      await _context.SaveChangesAsync();
-
-      return Deck.ToJson(deck);
     }
 
     [HttpPost("{deck_id}/cards")]

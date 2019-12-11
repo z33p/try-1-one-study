@@ -5,11 +5,7 @@ using AuthServer.Main.Contracts.V1;
 using AuthServer.Main.Contracts.V1.Requests;
 using AuthServer.Main.Contracts.V1.Responses;
 using AuthServer.Main.Services;
-using Microsoft.AspNetCore.Identity;
-using AuthServer.Main.Helpers;
-using Microsoft.IdentityModel.Tokens;
-using AuthServer.Main.Data;
-using Microsoft.Extensions.Options;
+
 
 namespace AuthServer.Main.Controllers.V1
 {

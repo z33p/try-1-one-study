@@ -5,17 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using FlashCards.Main.Models;
+using FlashCards.Models;
+using Microsoft.AspNetCore.Authorization;
+using FlashCards.Data;
 
-namespace FlashCards.Main.Controllers
+namespace FlashCards.Controllers
 {
+  [Authorize]
   [Route("[controller]")]
   [ApiController]
   public class CardsController : ControllerBase
   {
-    private readonly FlashCardsContext _context;
+    private readonly DataContext _context;
 
-    public CardsController(FlashCardsContext context)
+    public CardsController(DataContext context)
     {
       _context = context;
     }

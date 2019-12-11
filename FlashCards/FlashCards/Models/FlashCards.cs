@@ -1,12 +1,15 @@
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
-namespace FlashCards.Main.Models
+namespace FlashCards.Models
 {
   public class Deck
   {
     public long Id { get; set; }
     public string Title { get; set; }
+    public User User { get; set; }
+    public string UserId { get; set; }
     public IEnumerable<Card> Cards { get; set; }
 
     // Return a deck without cards
