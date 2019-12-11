@@ -33,6 +33,8 @@ namespace AuthServer.Main
 
       services.AddDbContext<DataContext>();
 
+      services.AddScoped<IAuthService, AuthService>();
+
       // Identity Config
       services
         .AddIdentity<IdentityUser, IdentityRole>()
@@ -47,6 +49,18 @@ namespace AuthServer.Main
       var _appSettings = appSettingsSection.Get<AppSettings>();
       var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
 
+      var tokenValidationParameters = new TokenValidationParameters
+      {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        RequireExpirationTime = false,
+        ValidateLifetime = true
+      };
+
+      services.AddSingleton(tokenValidationParameters);
+
       services.AddAuthentication(x =>
       {
         x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -55,15 +69,7 @@ namespace AuthServer.Main
       {
         // x.RequireHttpsMetadata = true;
         x.SaveToken = true;
-        x.TokenValidationParameters = new TokenValidationParameters
-        {
-          ValidateIssuerSigningKey = true,
-          IssuerSigningKey = new SymmetricSecurityKey(key),
-          ValidateIssuer = true,
-          ValidateAudience = true,
-          ValidAudience = _appSettings.Audience,
-          ValidIssuer = _appSettings.Issuer
-        };
+        x.TokenValidationParameters = tokenValidationParameters;
       });
     }
 

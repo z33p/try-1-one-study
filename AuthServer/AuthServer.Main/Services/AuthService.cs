@@ -15,7 +15,7 @@ using Microsoft.Extensions.Options;
 
 namespace AuthServer.Main.Services
 {
-  public class AuthService
+  public class AuthService : IAuthService
   {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
@@ -23,19 +23,11 @@ namespace AuthServer.Main.Services
     private readonly TokenValidationParameters _tokenValidationParameters;
     private readonly DataContext _context;
 
-    public AuthService(UserManager<IdentityUser> userManager, IOptions<AppSettings> appSettings, DataContext context, RoleManager<IdentityRole> roleManager)
+    public AuthService(UserManager<IdentityUser> userManager, IOptions<AppSettings> appSettings, TokenValidationParameters tokenValidationParameters, DataContext context, RoleManager<IdentityRole> roleManager)
     {
       _userManager = userManager;
       _appSettings = appSettings.Value;
-      _tokenValidationParameters = new TokenValidationParameters
-      {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_appSettings.Secret)),
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        RequireExpirationTime = false,
-        ValidateLifetime = true
-      };
+      _tokenValidationParameters = tokenValidationParameters;
       _context = context;
       _roleManager = roleManager;
     }

@@ -15,21 +15,12 @@ namespace AuthServer.Main.Controllers.V1
 {
   public class AuthController : Controller
   {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly IOptions<AppSettings> _appSettings;
-    private readonly DataContext _context;
-    private readonly AuthService _authService;
+    private readonly IAuthService _authService;
 
-    public AuthController(UserManager<IdentityUser> userManager, IOptions<AppSettings> appSettings, DataContext context, RoleManager<IdentityRole> roleManager)
+    public AuthController(IAuthService authService)
     {
-      _userManager = userManager;
-      _appSettings = appSettings;
-      _context = context;
-      _roleManager = roleManager;
-      _authService = new AuthService(_userManager, _appSettings, _context, _roleManager);
+      _authService = authService;
     }
-
 
     [HttpPost(ApiRoutes.Identity.Register)]
     public async Task<IActionResult> Register([FromBody] UserRegistrationRequest request)
