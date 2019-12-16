@@ -6,7 +6,7 @@ module.exports = {
     const { vDoc_id } = req.params;
     const vDoc = await VirtualDoc.findByPk(vDoc_id, {
       where: {
-        user_id: req.user.unique_name
+        user_id: req.user.id
       }
     });
 
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   async allByUser(req, res) {
-    const user_id = req.user.unique_name;
+    const user_id = req.user.id;
 
     const user = await User.findByPk(user_id, {
       include: {
@@ -31,7 +31,7 @@ module.exports = {
   },
 
   async store(req, res) {
-    const user_id = req.user.unique_name;
+    const user_id = req.user.id;
     const { title, body } = req.body;
 
     const user = await User.findByPk(user_id);

@@ -2,7 +2,7 @@ const User = require("../models/User");
 
 module.exports = {
   async index(req, res) {
-    const user_id = req.user.unique_name;
+    const user_id = req.user.id;
 
     const user = await User.findByPk(user_id);
 
@@ -17,8 +17,12 @@ module.exports = {
   },
 
   async store(req, res) {
-    const user = await User.create({ id: req.user.unique_name });
+    const user = await User.findByPk(req.user.id);
 
-    return res.status(201).json(user);
+    if (user) return res.status(400).json({ eror: "user already exists" });
+
+    const new_user = await User.create({ id: req.user.id });
+
+    return res.status(201).json(new_user);
   }
 };

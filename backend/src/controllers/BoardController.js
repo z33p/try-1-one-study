@@ -7,7 +7,7 @@ module.exports = {
 
     const board = await Board.findByPk(board_id, {
       where: {
-        user_id: req.user.unique_name
+        user_id: req.user.id
       }
     });
 
@@ -16,7 +16,7 @@ module.exports = {
     return res.json(board);
   },
   async allByUser(req, res) {
-    const user_id = req.user.unique_name;
+    const user_id = req.user.id;
 
     const user = await User.findByPk(user_id, {
       include: {
@@ -31,7 +31,7 @@ module.exports = {
   },
 
   async store(req, res) {
-    const user_id = req.user.unique_name;
+    const user_id = req.user.id;
     const { title } = req.body;
 
     const user = await User.findByPk(user_id);
