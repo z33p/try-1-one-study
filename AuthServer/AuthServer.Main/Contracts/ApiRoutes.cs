@@ -8,11 +8,14 @@
 
     //   public const string Base = Root + "/" + Version;
 
-    public static class Identity
+    public static class Auth
     {
-      public const string Login = "/auth/login";
-      public const string Register = "/auth/register";
-      public const string Refresh = "/auth/refresh";
+      public const string Register = "/register";
+      public const string Login = "/login";
+      public const string Logout = "/logout";
+      public const string Refresh = "/refresh";
+      public const string User = "/user";
+      public const string Users = "/users";
     }
   }
 }

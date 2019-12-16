@@ -9,6 +9,7 @@ using AuthServer.Main.Services;
 
 namespace AuthServer.Main.Controllers.V1
 {
+  [ApiController]
   public class AuthController : Controller
   {
     private readonly IAuthService _authService;
@@ -18,7 +19,7 @@ namespace AuthServer.Main.Controllers.V1
       _authService = authService;
     }
 
-    [HttpPost(ApiRoutes.Identity.Register)]
+    [HttpPost(ApiRoutes.Auth.Register)]
     public async Task<IActionResult> Register([FromBody] UserRegistrationRequest request)
     {
       if (!ModelState.IsValid)
@@ -46,7 +47,7 @@ namespace AuthServer.Main.Controllers.V1
       });
     }
 
-    [HttpPost(ApiRoutes.Identity.Login)]
+    [HttpPost(ApiRoutes.Auth.Login)]
     public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
     {
       var authResponse = await _authService.LoginAsync(request.Email, request.Password);
@@ -66,7 +67,7 @@ namespace AuthServer.Main.Controllers.V1
       });
     }
 
-    [HttpPost(ApiRoutes.Identity.Refresh)]
+    [HttpPost(ApiRoutes.Auth.Refresh)]
     public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request)
     {
       var authResponse = await _authService.RefreshTokenAsync(request.Token, request.RefreshToken);
