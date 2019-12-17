@@ -1,32 +1,63 @@
 import { call, put } from "redux-saga/effects";
-import api from "../services/api";
+import axios from 'axios';
+// import api from "../services/api";
 
-import { loadSuccess, loadFailure } from "../actions/auth/index";
+import { loadTokens, loadSuccess, loadFailure } from "../actions/auth/index";
 
 export function* loadUser() {
   try {
-
     let token: string | null = localStorage.getItem("token");
     let refreshToken: string | null = localStorage.getItem("refreshToken");
 
+    if (!(token && refreshToken)) yield put(loadFailure());
 
-    if (token && refreshToken) {
-      const res = yield call(api.post, "/auth/users/" + token);
-      yield put(loadSuccess(res.data));
+    else {
+      let config = {
+        headers: { authorization: "Bearer " + token }
+      }
+
+      const res = yield call(axios.post, "/auth/user", {}, config);
+      yield put(loadSuccess(token, refreshToken, res.data));
     }
-    else
-      yield put(loadFailure());
 
   } catch (err) {
     yield put(loadFailure());
   }
 }
 
-export function* loginUser(email: string, password: string) {
-  try {
-    const res = yield call(api.post, "/auth/login", { email, password });
+export interface ICredentials {
+  email: string,
+  password: string
+}
 
-    yield put(loadSuccess(res.data));
+interface ILogin {
+  type: string,
+  payload: ICredentials
+}
+
+export function* loginUser(action: ILogin) {
+  try {
+    let data = {
+      email: action.payload.email,
+      password: action.payload.password
+    }
+    const res = yield call(axios.post, "/auth/login", data);
+
+    yield put(loadTokens(res.data));
+  } catch (err) {
+    yield put(loadFailure());
+  }
+}
+
+export function* registerUser(action: ILogin) {
+  try {
+    let data = {
+      email: action.payload.email,
+      password: action.payload.password
+    }
+    const res = yield call(axios.post, "/auth/register", data);
+
+    yield put(loadTokens(res.data));
   } catch (err) {
     yield put(loadFailure());
   }
