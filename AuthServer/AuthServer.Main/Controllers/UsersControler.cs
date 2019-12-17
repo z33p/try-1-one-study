@@ -4,7 +4,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using AuthServer.Main.Data;
@@ -25,7 +24,7 @@ namespace AuthServer.Main.Controllers.V1
       _tokenValidationParameters = tokenValidationParameters;
     }
     [HttpPost(ApiRoutes.Auth.User)]
-    public new async Task<IdentityUser> User([FromHeader] string Authorization)
+    public new async Task<ActionResult> User([FromHeader] string Authorization)
     {
       var token = Authorization.Split("Bearer ")[1].ToString();
 
@@ -35,7 +34,9 @@ namespace AuthServer.Main.Controllers.V1
 
       var user = await _dataContext.Users.FindAsync(user_id);
 
-      return user;
+      if (user == null) return BadRequest("user not found");
+
+      return Ok(user);
     }
 
     private ClaimsPrincipal GetPrincipalFromToken(string token)
