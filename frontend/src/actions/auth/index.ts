@@ -1,17 +1,16 @@
 import { action } from "typesafe-actions";
 import { AuthTypes, IUser, TokensPayload } from "./types";
-import { ICredentials } from "../../sagas/auth";
+import { ICredentials } from "../../contracts/IAuthRequest";
 
-export const loadRequest = () => action(AuthTypes.USER_LOADING);
+export const loadUser = () => action(AuthTypes.USER_LOADING);
 
-export const loadSuccess = (token: string, refreshToken: string, user: IUser) =>
-  action(AuthTypes.USER_LOADED, { token, refreshToken, user });
+export const loadSuccess = (user: IUser) => action(AuthTypes.USER_LOADED, user);
 
 export const loginUser = (credentials: ICredentials) =>
-  action(AuthTypes.LOGIN_USER, credentials);
+  action(AuthTypes.LOGGING_IN, credentials);
 
 export const registerUser = (credentials: ICredentials) =>
-  action(AuthTypes.REGISTER_USER, credentials);
+  action(AuthTypes.REGISTERING, credentials);
 
 export const loadTokens = (data: TokensPayload) =>
   action(AuthTypes.LOAD_TOKENS, data);

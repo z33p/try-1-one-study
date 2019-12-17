@@ -23,7 +23,7 @@ const reducer: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         token: action.payload.token,
-        refreshToken: action.payload.refreshToken,
+        refreshToken: action.payload.refreshToken
       };
 
     case AuthTypes.USER_LOADED:

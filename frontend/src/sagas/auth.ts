@@ -1,63 +1,58 @@
 import { call, put } from "redux-saga/effects";
-import axios from 'axios';
-// import api from "../services/api";
+import axios from "axios";
+import {
+  loadTokens,
+  loadSuccess,
+  loadFailure,
+  loadUser
+} from "../actions/auth/index";
+import { IAuthRequest } from "../contracts/IAuthRequest";
+import { AuthRoutes } from "../contracts/AuthRoutes";
 
-import { loadTokens, loadSuccess, loadFailure } from "../actions/auth/index";
-
-export function* loadUser() {
+export function* loadingUser() {
   try {
     let token: string | null = localStorage.getItem("token");
     let refreshToken: string | null = localStorage.getItem("refreshToken");
 
     if (!(token && refreshToken)) yield put(loadFailure());
-
     else {
       let config = {
         headers: { authorization: "Bearer " + token }
-      }
+      };
 
-      const res = yield call(axios.post, "/auth/user", {}, config);
-      yield put(loadSuccess(token, refreshToken, res.data));
+      const res = yield call(axios.post, AuthRoutes.USER, {}, config);
+      yield put(loadSuccess(res.data));
     }
-
   } catch (err) {
     yield put(loadFailure());
   }
 }
 
-export interface ICredentials {
-  email: string,
-  password: string
-}
-
-interface ILogin {
-  type: string,
-  payload: ICredentials
-}
-
-export function* loginUser(action: ILogin) {
+export function* loggingIn(action: IAuthRequest) {
   try {
     let data = {
       email: action.payload.email,
       password: action.payload.password
-    }
-    const res = yield call(axios.post, "/auth/login", data);
+    };
+    const res = yield call(axios.post, AuthRoutes.LOGIN, data);
 
     yield put(loadTokens(res.data));
+    yield put(loadUser());
   } catch (err) {
     yield put(loadFailure());
   }
 }
 
-export function* registerUser(action: ILogin) {
+export function* registering(action: IAuthRequest) {
   try {
     let data = {
       email: action.payload.email,
       password: action.payload.password
-    }
-    const res = yield call(axios.post, "/auth/register", data);
+    };
+    const res = yield call(axios.post, AuthRoutes.REGISTER, data);
 
     yield put(loadTokens(res.data));
+    yield put(loadUser());
   } catch (err) {
     yield put(loadFailure());
   }
