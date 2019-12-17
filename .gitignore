@@ -2,3 +2,4 @@ bin/
 obj/
 server_data/
 .vscode/
+frontend/src/styles/tailwind.css

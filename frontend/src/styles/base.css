@@ -32,3 +32,8 @@ h3 {
   @apply font-semibold;
   @apply py-1;
 }
+
+menu {
+  @apply m-0;
+  @apply p-0;
+}

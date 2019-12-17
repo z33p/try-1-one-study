@@ -6,7 +6,7 @@ import {
   loadFailure,
   loadUser
 } from "../actions/auth/index";
-import { IAuthRequest } from "../contracts/IAuthRequest";
+import { IAuthRequest } from "../contracts/Requests/IAuthRequest";
 import { AuthRoutes } from "../contracts/AuthRoutes";
 
 export function* loadingUser() {

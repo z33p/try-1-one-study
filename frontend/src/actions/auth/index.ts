@@ -1,6 +1,6 @@
 import { action } from "typesafe-actions";
 import { AuthTypes, IUser, TokensPayload } from "./types";
-import { ICredentials } from "../../contracts/IAuthRequest";
+import { ICredentials } from "../../contracts/Requests/IAuthRequest";
 
 export const loadUser = () => action(AuthTypes.USER_LOADING);
 
