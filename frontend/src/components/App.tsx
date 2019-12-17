@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import store from "../store";
-import { ICredentials } from "../sagas/auth";
 import { loginUser } from "../actions/auth";
+import { ICredentials } from "../contracts/IAuthRequest";
 
 const App: React.FC = () => {
   useEffect(() => {
