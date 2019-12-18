@@ -18,6 +18,7 @@ services:
       - frontend
       - backend
       - auth_server
+      - flashcards
     networks:
       - localdev
 
@@ -28,7 +29,6 @@ services:
     restart: always
     volumes:
       - ./frontend:/app
-      - /app/node_modules
     networks:
       - localdev
 
@@ -39,7 +39,6 @@ services:
     restart: always
     volumes:
       - ./backend:/app
-      - /app/node_modules
     depends_on:
       - backend_db
     networks:
@@ -61,6 +60,7 @@ services:
     build: AuthServer/
     image: one/auth_server
     container_name: auth_server
+    restart: always
     depends_on:
       - auth_server_db
     networks:
@@ -82,6 +82,7 @@ services:
     build: FlashCards/
     image: one/flashcards
     container_name: flashcards
+    restart: always
     depends_on:
       - flashcards_db
     networks:
