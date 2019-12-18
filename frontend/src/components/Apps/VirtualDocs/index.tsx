@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { IVirtualDoc } from "../../actions/VirtualDocs/types";
-import { ApplicationState } from "../../store";
+import { IVirtualDoc } from "../../../actions/VirtualDocs/types";
+import { ApplicationState } from "../../../store";
 import { connect } from "react-redux";
-import { loadVirtualDocs } from "../../actions/VirtualDocs";
+import { loadVirtualDocs } from "../../../actions/VirtualDocs";
+import CraftBar from "./CraftBar";
 
 interface StateProps {
   vdocs: IVirtualDoc[];
@@ -14,15 +15,25 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps;
 
-interface IVirtualDocsProps {}
+// interface IVirtualDocsProps {}
 
-const VirtualDocs: React.FC<Props> = ({ loadVirtualDocs }) => {
+const VirtualDocs: React.FC<Props> = ({ loadVirtualDocs, vdocs }) => {
   useEffect(() => {
     loadVirtualDocs();
   }, []);
+
   return (
     <div>
       <h3>VirtualDocs App</h3>
+      <CraftBar />
+      {vdocs.map(vdoc => (
+        <ul key={vdoc.id}>
+          <li>
+            <h3>{vdoc.title}</h3>
+            <p>{vdoc.body}</p>
+          </li>
+        </ul>
+      ))}
     </div>
   );
 };

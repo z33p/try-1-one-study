@@ -1,6 +1,8 @@
 import React from "react";
 import Menu from "./Menu";
 import WorkStation from "./WorkStation";
+import { Switch, Route } from "react-router-dom";
+import Login from "./Login";
 
 const Main: React.FC = () => {
   return (
@@ -11,7 +13,10 @@ const Main: React.FC = () => {
           <Menu />
         </div>
         <div className="w-4/5">
-          <WorkStation />
+          <Switch>
+            <Route path="/home" component={WorkStation} />
+            <Route exact path="/login" component={Login} />
+          </Switch>
         </div>
       </div>
     </main>

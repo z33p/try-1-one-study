@@ -4,11 +4,15 @@ import createSagaMiddleware from "redux-saga";
 import { AuthState } from "./actions/auth/types";
 import rootReducer from "./reducers/rootReducer";
 import rootSaga from "./sagas/rootSaga";
-import { VirtualDocsState } from "./actions/VirtualDocs/types";
+import { IVirtualDocsState } from "./actions/VirtualDocs/types";
+import { IErrorState } from "./actions/ErrorTypes";
+import { IMessageState } from "./actions/MessageTypes";
 
 export interface ApplicationState {
   auth: AuthState;
-  vdocs: VirtualDocsState;
+  vdocs: IVirtualDocsState;
+  errors: IErrorState;
+  messages: IMessageState;
 }
 
 const sagaMiddleware = createSagaMiddleware();

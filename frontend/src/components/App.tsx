@@ -15,6 +15,17 @@ const App: React.FC = () => {
     };
 
     store.dispatch(loginUser(credentials));
+    // import axios from "axios";
+    // axios
+    //   .post(
+    //     "http://localhost/api/users",
+    //     {},
+    //     {
+    //       headers: { authorization: "Bearer " + localStorage.getItem("token") }
+    //     }
+    //   )
+    //   .then(res => console.log(res))
+    //   .catch(err => console.log(err));
   }, []);
 
   return (

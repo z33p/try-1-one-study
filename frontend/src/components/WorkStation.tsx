@@ -1,8 +1,9 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import VirtualDocs from "./Apps/VirtualDocs";
+import { Switch } from "react-router-dom";
+import VirtualDocs from "./Apps/VirtualDocs/index";
 import FlashCards from "./Apps/FlashCards";
 import TaskBoard from "./Apps/TaskBoard";
+import PrivateRoute from "./common/PrivateRoute.js";
 
 interface IWorkStationProps {}
 
@@ -13,9 +14,9 @@ const WorkStation: React.FC<IWorkStationProps> = () => {
 
       <Switch>
         {/* <Route exact path="/home" component={Home} /> */}
-        <Route exact path="/home/taskboard" component={TaskBoard} />
-        <Route exact path="/home/flashcards" component={FlashCards} />
-        <Route exact path="/home/virtual_docs" component={VirtualDocs} />
+        <PrivateRoute exact path="/home/taskboard" component={TaskBoard} />
+        <PrivateRoute exact path="/home/flashcards" component={FlashCards} />
+        <PrivateRoute exact path="/home/virtual_docs" component={VirtualDocs} />
       </Switch>
     </div>
   );
