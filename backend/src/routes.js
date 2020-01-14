@@ -3,6 +3,7 @@ const UserController = require("./controllers/UserController");
 const VirtualDocController = require("./controllers/VirtualDocController");
 const BoardController = require("./controllers/BoardController");
 const TaskController = require("./controllers/TaskController");
+const ApiRoutes = require("./contracts/ApiRoutes");
 
 const routes = express.Router();
 
@@ -10,18 +11,18 @@ routes.get("/", (req, res) => {
   return res.json({ hello: "world" });
 });
 
-routes.get("/users", UserController.all);
-routes.post("/users", UserController.store);
-routes.get("/users/:user_id", UserController.index);
+routes.get(ApiRoutes.users.all, UserController.all);
+routes.get(ApiRoutes.users.index, UserController.index);
+routes.post(ApiRoutes.users.create, UserController.store);
 
-routes.post("/virtual_docs", VirtualDocController.store);
-routes.get("/virtual_docs", VirtualDocController.allByUser);
-routes.get("/virtual_docs/:vDoc_id", VirtualDocController.index);
+routes.get(ApiRoutes.virtual_docs.index, VirtualDocController.index);
+routes.get(ApiRoutes.virtual_docs.allByUser, VirtualDocController.allByUser);
+routes.post(ApiRoutes.virtual_docs.create, VirtualDocController.store);
 
-routes.post("/boards", BoardController.store);
-routes.get("/boards", BoardController.allByUser);
-routes.get("/boards/:board_id", BoardController.index);
-routes.post("/boards/:board_id/tasks", TaskController.store);
-routes.get("/boards/:board_id/tasks", TaskController.allByBoard);
+routes.post(ApiRoutes.boards.create, BoardController.store);
+routes.get(ApiRoutes.boards.allByUser, BoardController.allByUser);
+routes.get(ApiRoutes.boards.index, BoardController.index);
+routes.post(ApiRoutes.tasks.create, TaskController.store);
+routes.get(ApiRoutes.tasks.allByBoard, TaskController.allByBoard);
 
 module.exports = routes;
