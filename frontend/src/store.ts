@@ -5,14 +5,12 @@ import { AuthState } from "./actions/auth/types";
 import rootReducer from "./reducers/rootReducer";
 import rootSaga from "./sagas/rootSaga";
 import { IVirtualDocsState } from "./actions/VirtualDocs/types";
-import { IErrorState } from "./actions/ErrorTypes";
-import { IMessageState } from "./actions/MessageTypes";
+import { IAlertState } from "./actions/alerts/types";
 
-export interface ApplicationState {
+export interface AppState {
   auth: AuthState;
   vdocs: IVirtualDocsState;
-  errors: IErrorState;
-  messages: IMessageState;
+  alert: IAlertState;
 }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -21,7 +19,7 @@ const initialState = {};
 
 const middleware = [sagaMiddleware];
 
-const store: Store<ApplicationState> = createStore(
+const store: Store<AppState> = createStore(
   rootReducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))

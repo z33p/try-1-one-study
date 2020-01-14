@@ -8,6 +8,8 @@ import {
 } from "../actions/auth/index";
 import { IAuthRequest } from "../contracts/Requests/IAuthRequest";
 import { AuthRoutes } from "../contracts/AuthRoutes";
+import { showError, showMessage } from "../actions/alerts";
+import { AuthTypes } from "../actions/auth/types";
 
 export function* loadingUser() {
   try {
@@ -22,9 +24,14 @@ export function* loadingUser() {
 
       const res = yield call(axios.post, AuthRoutes.USER, {}, config);
       yield put(loadSuccess(res.data));
+      yield put(showMessage({ text: "USER LOADED" }))
     }
   } catch (err) {
     yield put(loadFailure());
+    yield put(showError({
+      text: "USER LOAD ERROR",
+      status: err.response.status
+    }));
   }
 }
 
@@ -40,6 +47,10 @@ export function* loggingIn(action: IAuthRequest) {
     yield put(loadUser());
   } catch (err) {
     yield put(loadFailure());
+    yield put(showError({
+      text: AuthTypes.AUTH_ERROR,
+      status: err.response.status
+    }));
   }
 }
 
@@ -55,5 +66,9 @@ export function* registering(action: IAuthRequest) {
     yield put(loadUser());
   } catch (err) {
     yield put(loadFailure());
+    yield put(showError({
+      text: AuthTypes.AUTH_ERROR,
+      status: err.response.status
+    }));
   }
 }

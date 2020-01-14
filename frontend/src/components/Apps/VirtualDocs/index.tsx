@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { IVirtualDoc } from "../../../actions/VirtualDocs/types";
-import { ApplicationState } from "../../../store";
+import { AppState } from "../../../store";
 import { connect } from "react-redux";
 import { loadVirtualDocs } from "../../../actions/VirtualDocs";
 import CraftBar from "./CraftBar";
@@ -20,7 +20,7 @@ type Props = StateProps & DispatchProps;
 const VirtualDocs: React.FC<Props> = ({ loadVirtualDocs, vdocs }) => {
   useEffect(() => {
     loadVirtualDocs();
-  }, []);
+  }, [loadVirtualDocs]);
 
   return (
     <div>
@@ -38,7 +38,7 @@ const VirtualDocs: React.FC<Props> = ({ loadVirtualDocs, vdocs }) => {
   );
 };
 
-const mapStateToProps = (state: ApplicationState) => ({
+const mapStateToProps = (state: AppState) => ({
   vdocs: state.vdocs.vdocs
 });
 

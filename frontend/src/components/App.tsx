@@ -5,37 +5,34 @@ import { loginUser } from "../actions/auth";
 import { ICredentials } from "../contracts/Requests/IAuthRequest";
 import Main from "./Main";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+import Alerts from "./Alerts.jsx";
 
 const App: React.FC = () => {
   useEffect(() => {
     // Component did mount
-    let credentials: ICredentials = {
+    const credentials: ICredentials = {
       email: "z33p@gmail.com",
       password: "#Z33333p"
     };
 
     store.dispatch(loginUser(credentials));
-    // import axios from "axios";
-    // axios
-    //   .post(
-    //     "http://localhost/api/users",
-    //     {},
-    //     {
-    //       headers: { authorization: "Bearer " + localStorage.getItem("token") }
-    //     }
-    //   )
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err));
+
   }, []);
 
   return (
     <Provider store={store}>
-      <Router>
-        <div className="App">
-          <h1>App Component</h1>
-          <Main />
-        </div>
-      </Router>
+      <AlertProvider template={AlertTemplate} timeout={3500}>
+        <Router>
+          <div className="App">
+            <Alerts />
+            <h1>App Component</h1>
+            <Main />
+          </div>
+        </Router>
+      </AlertProvider>
+
     </Provider>
   );
 };

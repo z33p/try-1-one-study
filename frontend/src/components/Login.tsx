@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { withRouter } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
 
-interface LoginProps {}
+interface LoginProps { }
 
 type Props = LoginProps & RouteComponentProps<any>;
 
@@ -12,7 +12,7 @@ const Login: React.FC<Props> = ({ history }) => {
     setInterval(() => {
       history.push("/home/virtual_docs");
     }, 1000);
-  }, []);
+  }, [history]);
 
   return (
     <div className="">

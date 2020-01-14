@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY . ./
 
-RUN yarn
+# RUN yarn
 
 CMD ["yarn", "dev"]

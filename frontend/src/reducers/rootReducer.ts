@@ -2,13 +2,10 @@ import { combineReducers } from "redux";
 
 import auth from "./auth";
 import vdocs from "./vdocs";
-import error from "./errors";
-import message from "./message";
-
+import alert from "./alert";
 
 export default combineReducers({
   auth,
+  alert,
   vdocs,
-  error,
-  message
 });
