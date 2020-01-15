@@ -1,5 +1,6 @@
 const express = require("express");
 const UserController = require("./controllers/UserController");
+const BookController = require("./controllers/BookController");
 const VirtualDocController = require("./controllers/VirtualDocController");
 const BoardController = require("./controllers/BoardController");
 const TaskController = require("./controllers/TaskController");
@@ -15,8 +16,11 @@ routes.get(ApiRoutes.users.all, UserController.all);
 routes.get(ApiRoutes.users.index, UserController.index);
 routes.post(ApiRoutes.users.create, UserController.store);
 
+routes.post(ApiRoutes.books.create, BookController.store);
+routes.get(ApiRoutes.books.index, BookController.index);
+routes.get(ApiRoutes.books.allByUser, BookController.allByUser);
+
 routes.get(ApiRoutes.virtual_docs.index, VirtualDocController.index);
-routes.get(ApiRoutes.virtual_docs.allByUser, VirtualDocController.allByUser);
 routes.post(ApiRoutes.virtual_docs.create, VirtualDocController.store);
 
 routes.post(ApiRoutes.boards.create, BoardController.store);

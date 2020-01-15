@@ -25,21 +25,16 @@ module.exports = {
       }
     });
 
-    if (!user) return res.status(404).json({ error: "user not found" });
-
     return res.json(user.books);
   },
 
   async store(req, res) {
     const user_id = req.user.id;
-    const { title } = req.body;
-
-    const user = await User.findByPk(user_id);
-
-    if (!user) return res.status(400).json({ error: "User not found" });
+    const { title, detail } = req.body;
 
     const book = await Book.create({
       title,
+      detail,
       user_id
     });
 

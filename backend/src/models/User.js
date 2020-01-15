@@ -14,9 +14,9 @@ class User extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.VirtualDoc, {
+    this.hasMany(models.Book, {
       foreignKey: "user_id",
-      as: "virtual_docs"
+      as: "books"
     });
     this.hasMany(models.Board, { foreignKey: "user_id", as: "boards" });
   }

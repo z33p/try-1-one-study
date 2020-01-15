@@ -6,7 +6,7 @@ module.exports = {
 
     const user = await User.findByPk(user_id);
 
-    if (!user) return res.status(404).json({ error: "User not found" });
+    if (!user) return res.status(404).json({ error: "user not found" });
 
     return res.json(user);
   },
@@ -19,7 +19,7 @@ module.exports = {
   async store(req, res) {
     const user = await User.findByPk(req.user.id);
 
-    if (user) return res.status(400).json({ eror: "user already exists" });
+    if (user) return res.status(400).json({ error: "user already exists" });
 
     const new_user = await User.create({ id: req.user.id });
 
