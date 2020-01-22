@@ -9,7 +9,7 @@ const ApiRoutes = require("./contracts/ApiRoutes");
 const routes = express.Router();
 
 routes.get("/", (req, res) => {
-  return res.json({ hello: "world" });
+  return res.json(ApiRoutes);
 });
 
 routes.get(ApiRoutes.users.all, UserController.all);

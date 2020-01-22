@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 const User = require("./models/User");
 
 function authorize(req, res, next) {
+  if (req.url === "/") next();
+
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null) return res.sendStatus(401);
