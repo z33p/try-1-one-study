@@ -19,8 +19,8 @@ const Main: React.FC = () => {
 
   const minimized = {
     minimized: true,
-    menu_width: "w-1/10",
-    workStation_width: "w-1/12"
+    menu_width: "w-auto px-2",
+    workStation_width: "w-auto"
   }
 
   const [menuConfig, setMenuConfig] = useState(maximized);
@@ -30,10 +30,10 @@ const Main: React.FC = () => {
       <h2>Main Component</h2>
       <div className="h-screen flex">
         <div className={`${menuConfig.menu_width} border-2 border-gray-200`}>
-          <button className="" onClick={() => { menuConfig.minimized ? setMenuConfig(maximized) : setMenuConfig(minimized) }}>{icons.bars}</button>
+          <button onClick={() => { menuConfig.minimized ? setMenuConfig(maximized) : setMenuConfig(minimized) }}>{icons.bars}</button>
           <Menu minimized={menuConfig.minimized} />
         </div>
-        <div className={menuConfig.workStation_width}>
+        <div className={`${menuConfig.workStation_width} p-6`}>
           <Switch>
             <Route path="/home" component={WorkStation} />
             <Route exact path="/login" component={Login} />

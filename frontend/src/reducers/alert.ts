@@ -1,8 +1,8 @@
 
 import { Reducer } from "redux";
-import { AlertTypes, IAlertState } from "../actions/alerts/types";
+import { AlertTypes, AlertState } from "../actions/alerts/types";
 
-const INITIAL_STATE: IAlertState = {
+const INITIAL_STATE: AlertState = {
   error: {
     text: "",
     status: null
@@ -12,7 +12,7 @@ const INITIAL_STATE: IAlertState = {
   }
 };
 
-const reducer: Reducer<IAlertState> = (state = INITIAL_STATE, action) => {
+const reducer: Reducer<AlertState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case AlertTypes.SET_ERROR:
       return {

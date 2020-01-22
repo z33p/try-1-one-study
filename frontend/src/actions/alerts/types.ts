@@ -12,7 +12,7 @@ export interface IMessageState {
   text: string
 }
 
-export interface IAlertState {
+export interface AlertState {
   error: IErrorState,
   message: IMessageState
 }

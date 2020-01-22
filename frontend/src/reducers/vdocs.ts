@@ -1,14 +1,14 @@
 import {
   VirtualDocsTypes,
-  IVirtualDocsState
+  VirtualDocsState
 } from "../actions/VirtualDocs/types";
 import { Reducer } from "redux";
 
-const INITIAL_STATE: IVirtualDocsState = {
+const INITIAL_STATE: VirtualDocsState = {
   vdocs: []
 };
 
-const reducer: Reducer<IVirtualDocsState> = (state = INITIAL_STATE, action) => {
+const reducer: Reducer<VirtualDocsState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case VirtualDocsTypes.VDOCS_LOADED:
       return {
