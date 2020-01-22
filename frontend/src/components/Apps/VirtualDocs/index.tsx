@@ -1,45 +1,39 @@
 import React, { useEffect } from "react";
-import { IVirtualDoc } from "../../../actions/VirtualDocs/types";
 import { AppState } from "../../../store";
 import { connect } from "react-redux";
-import { loadVirtualDocs } from "../../../actions/VirtualDocs";
 import CraftBar from "./CraftBar";
+import { IBook } from "../../../actions/Books/types";
+import { loadBooks } from "../../../actions/Books/index";
+import BookView from "./BookView";
 
 interface StateProps {
-  vdocs: IVirtualDoc[];
+  books: IBook[];
 }
 
 interface DispatchProps {
-  loadVirtualDocs(): void;
+  loadBooks(): void;
 }
 
 type Props = StateProps & DispatchProps;
 
-// interface IVirtualDocsProps {}
-
-const VirtualDocs: React.FC<Props> = ({ loadVirtualDocs, vdocs }) => {
+const Books: React.FC<Props> = ({ loadBooks, books }) => {
   useEffect(() => {
-    loadVirtualDocs();
-  }, [loadVirtualDocs]);
+    loadBooks();
+  }, [loadBooks]);
 
   return (
     <div>
-      <h3>VirtualDocs App</h3>
+      <h3>Books App</h3>
       <CraftBar />
-      {vdocs.map(vdoc => (
-        <ul key={vdoc.id}>
-          <li>
-            <h3>{vdoc.title}</h3>
-            <p>{vdoc.body}</p>
-          </li>
-        </ul>
-      ))}
+      <nav className="flex justify-around p-4">
+        {books.map(book => <BookView key={book.id} book={book} />)}
+      </nav>
     </div>
   );
 };
 
 const mapStateToProps = (state: AppState) => ({
-  vdocs: state.vdocs.vdocs
+  books: state.books.books
 });
 
-export default connect(mapStateToProps, { loadVirtualDocs })(VirtualDocs);
+export default connect(mapStateToProps, { loadBooks })(Books);

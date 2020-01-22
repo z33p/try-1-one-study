@@ -1,17 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createVirtualDoc } from "../../../actions/VirtualDocs/index";
-import { IVirtualDocRequest } from "../../../contracts/Requests/IVirtualDocRequest";
+import { createBook } from "../../../actions/Books/index";
+import { IBookRequest } from "../../../contracts/Requests/IBookRequest";
 
 interface CraftBarProps {}
 
 interface DispatchProps {
-  createVirtualDoc(vdoc: IVirtualDocRequest): void;
+  createBook(book: IBookRequest): void;
 }
 
 type Props = CraftBarProps & DispatchProps;
 
-const CraftBar: React.FC<Props> = ({ createVirtualDoc }) => {
+const CraftBar: React.FC<Props> = ({ createBook }) => {
   return (
     <div className="">
       <h3 className="">Craft Bar</h3>
@@ -20,7 +20,7 @@ const CraftBar: React.FC<Props> = ({ createVirtualDoc }) => {
           className="text-white bg-blue-500"
           onClick={() => {
             let title = prompt("Insira o título do documento?");
-            if (title) createVirtualDoc({ title });
+            if (title) createBook({ title });
           }}
         >
           Create
@@ -30,4 +30,4 @@ const CraftBar: React.FC<Props> = ({ createVirtualDoc }) => {
   );
 };
 
-export default connect(null, { createVirtualDoc })(CraftBar);
+export default connect(null, { createBook })(CraftBar);
