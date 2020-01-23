@@ -4,7 +4,7 @@ interface UsersRoutes {
     create: string
 }
 
-export interface IBooksRoutes {
+export interface NotebooksRoutes {
     index: string,
     create: string,
     allByUser: string,
@@ -29,7 +29,7 @@ interface TasksRoutes {
 
 interface ApiRoutes {
     users: UsersRoutes,
-    books: IBooksRoutes,
+    notebooks: NotebooksRoutes,
     tasks: TasksRoutes
     boards: BoardsRoutes,
     virtual_docs: VirtualDocsRoutes,

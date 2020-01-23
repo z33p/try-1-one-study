@@ -6,12 +6,16 @@ import rootReducer from "./reducers/rootReducer";
 import rootSaga from "./sagas/rootSaga";
 import { VirtualDocsState } from "./actions/VirtualDocs/types";
 import { AlertState } from "./actions/alerts/types";
-import { BooksState } from "./actions/Books/types";
+import { NotebooksState } from "./actions/Notebooks/types";
 import { RoutesState } from "./actions/routes/types";
+
+interface virtual_paper {
+  notebooks: NotebooksState
+}
 
 export interface AppState {
   auth: AuthState;
-  books: BooksState;
+  virtual_paper: virtual_paper;
   vdocs: VirtualDocsState;
   alert: AlertState;
   routes: RoutesState

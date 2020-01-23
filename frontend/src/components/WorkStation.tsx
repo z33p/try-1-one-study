@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch } from "react-router-dom";
-import VirtualDocs from "./Apps/VirtualDocs/index";
-import FlashCards from "./Apps/FlashCards";
+import VirtualDocs from "./Apps/VirtualPapers/index";
+import FlashCards from "./Apps/FlashCards/index";
 import TaskBoard from "./Apps/TaskBoard";
 import PrivateRoute from "./common/PrivateRoute.js";
 

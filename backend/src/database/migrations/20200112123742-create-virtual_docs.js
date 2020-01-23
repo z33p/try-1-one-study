@@ -9,10 +9,10 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
       },
-      book_id: {
+      notebook_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: "books", key: "id" },
+        references: { model: "notebooks", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "CASCADE"
       },

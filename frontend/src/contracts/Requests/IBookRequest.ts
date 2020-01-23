@@ -1,10 +1,10 @@
-import { IBook } from "../../actions/Books/types";
+import { INotebook } from "../../actions/Notebooks/types";
 
-export interface IBookRequest {
+export interface INotebookRequest {
   title: string,
   detail?: string
 }
-export interface IActionBook {
+export interface IActionNotebook {
   type: string;
-  payload: IBook;
+  payload: INotebook;
 }

@@ -12,7 +12,7 @@ class VirtualDoc extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Book, { foreignKey: "book_id", as: "book" });
+    this.belongsTo(models.Notebook, { foreignKey: "notebook_id", as: "notebook" });
   }
 }
 

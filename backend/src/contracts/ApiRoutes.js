@@ -7,23 +7,23 @@ const ApiRoutes = {
     create: version + "/users"
   },
 
-  books: {
-    allByUser: `${version}/books`,
-    index: `${version}/books/:book_id`,
-    create: `${version}/books`,
-    allVirtualDocs: `${version}/books/:book_id/virtual_docs`,
+  notebooks: {
+    allByUser: `${version}/notebooks`,
+    index: `${version}/notebooks/:notebook_id`,
+    create: `${version}/notebooks`,
+    allVirtualDocs: `${version}/notebooks/:notebook_id/virtual_docs`,
     test: {
-      index: book_id => `${version}/books/${book_id}`,
-      allVirtualDocs: book_id => `${version}/books/${book_id}/virtual_docs`
+      index: notebook_id => `${version}/notebooks/${notebook_id}`,
+      allVirtualDocs: notebook_id => `${version}/notebooks/${notebook_id}/virtual_docs`
     }
   },
 
   virtual_docs: {
     index: `${version}/virtual_docs/:vDoc_id`,
-    create: `${version}/books/:book_id/virtual_docs`,
+    create: `${version}/notebooks/:notebook_id/virtual_docs`,
     test: {
       index: vDoc_id => `${version}/virtual_docs/${vDoc_id}`,
-      create: book_id => `${version}/books/${book_id}/virtual_docs`
+      create: notebook_id => `${version}/notebooks/${notebook_id}/virtual_docs`
     }
   },
 

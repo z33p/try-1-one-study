@@ -13,16 +13,16 @@ const INITIAL_STATE: RoutesState = {
       create: version + "/users"
     },
 
-    books: {
-      allByUser: `${version}/books`,
-      index: `${version}/books/:book_id`,
-      create: `${version}/books`,
-      allVirtualDocs: `${version}/books/:book_id/virtual_docs`,
+    notebooks: {
+      allByUser: `${version}/notebooks`,
+      index: `${version}/notebooks/:notebook_id`,
+      create: `${version}/notebooks`,
+      allVirtualDocs: `${version}/notebooks/:notebook_id/virtual_docs`,
     },
 
     virtual_docs: {
       index: `${version}/virtual_docs/:vDoc_id`,
-      create: `${version}/books/:book_id/virtual_docs`,
+      create: `${version}/notebooks/:notebook_id/virtual_docs`,
     },
 
     boards: {

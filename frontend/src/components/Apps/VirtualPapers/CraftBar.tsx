@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createBook } from "../../../actions/Books/index";
-import { IBookRequest } from "../../../contracts/Requests/IBookRequest";
+import { createNotebook } from "../../../actions/Notebooks/index";
+import { INotebookRequest } from "../../../contracts/Requests/IBookRequest";
 
 interface CraftBarProps {}
 
 interface DispatchProps {
-  createBook(book: IBookRequest): void;
+  createBook(book: INotebookRequest): void;
 }
 
 type Props = CraftBarProps & DispatchProps;
@@ -30,4 +30,4 @@ const CraftBar: React.FC<Props> = ({ createBook }) => {
   );
 };
 
-export default connect(null, { createBook })(CraftBar);
+export default connect(null, { createBook: createNotebook })(CraftBar);

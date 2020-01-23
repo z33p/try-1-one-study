@@ -20,7 +20,7 @@ const Main: React.FC = () => {
   const minimized = {
     minimized: true,
     menu_width: "w-auto px-2",
-    workStation_width: "w-auto"
+    workStation_width: "w-full"
   }
 
   const [menuConfig, setMenuConfig] = useState(maximized);
