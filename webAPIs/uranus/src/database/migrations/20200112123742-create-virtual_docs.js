@@ -2,40 +2,40 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("virtual_docs", {
+    return queryInterface.createTable("virtual_papers", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false
+        allowNull: false,
       },
       notebook_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "notebooks", key: "id" },
         onUpdate: "CASCADE",
-        onDelete: "CASCADE"
+        onDelete: "CASCADE",
       },
       title: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       body: {
         type: Sequelize.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updated_at: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("virtual_docs");
-  }
+    return queryInterface.dropTable("virtual_papers");
+  },
 };

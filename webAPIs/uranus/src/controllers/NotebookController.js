@@ -7,11 +7,11 @@ module.exports = {
 
     const notebook = await Notebook.findByPk(notebook_id, {
       where: {
-        user_id: req.user.id
+        user_id: req.user.id,
       },
       include: {
-        association: "virtual_docs"
-      }
+        association: "virtual_papers",
+      },
     });
 
     if (!notebook) return res.status(404).json({ error: "notebook not found" });
@@ -25,10 +25,10 @@ module.exports = {
       include: {
         association: "notebooks",
         include: {
-          association: "virtual_docs"
+          association: "virtual_papers",
         },
-        attributes: ["id", "title", "created_at", "updated_at"]
-      }
+        attributes: ["id", "title", "created_at", "updated_at"],
+      },
     });
 
     return res.json(user.notebooks);
@@ -41,9 +41,9 @@ module.exports = {
     const notebook = await Notebook.create({
       title,
       detail,
-      user_id
+      user_id,
     });
 
     return res.status(201).json(notebook);
-  }
+  },
 };

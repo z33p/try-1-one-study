@@ -5,7 +5,7 @@ class Notebook extends Model {
     super.init(
       {
         title: DataTypes.STRING,
-        detail: DataTypes.TEXT
+        detail: DataTypes.TEXT,
       },
       { sequelize }
     );
@@ -13,7 +13,10 @@ class Notebook extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: "user_id", as: "user" });
-    this.hasMany(models.VirtualDoc, { foreignKey: "notebook_id", as: "virtual_docs" });
+    this.hasMany(models.VirtualPaper, {
+      foreignKey: "notebook_id",
+      as: "virtual_papers",
+    });
   }
 }
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const UserController = require("./controllers/UserController");
 const BookController = require("./controllers/NotebookController");
-const VirtualDocController = require("./controllers/VirtualDocController");
+const VirtualPaperController = require("./controllers/VirtualPaperController");
 const BoardController = require("./controllers/BoardController");
 const TaskController = require("./controllers/TaskController");
 const ApiRoutes = require("./contracts/ApiRoutes");
@@ -20,8 +20,8 @@ routes.post(ApiRoutes.notebooks.create, BookController.store);
 routes.get(ApiRoutes.notebooks.index, BookController.index);
 routes.get(ApiRoutes.notebooks.allByUser, BookController.allByUser);
 
-routes.get(ApiRoutes.virtual_docs.index, VirtualDocController.index);
-routes.post(ApiRoutes.virtual_docs.create, VirtualDocController.store);
+routes.get(ApiRoutes.virtual_papers.index, VirtualPaperController.index);
+routes.post(ApiRoutes.virtual_papers.create, VirtualPaperController.store);
 
 routes.post(ApiRoutes.boards.create, BoardController.store);
 routes.get(ApiRoutes.boards.allByUser, BoardController.allByUser);

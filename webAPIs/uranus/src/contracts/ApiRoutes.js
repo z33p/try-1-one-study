@@ -4,39 +4,41 @@ const ApiRoutes = {
   users: {
     all: version + "/users",
     index: version + "/users/:user_id",
-    create: version + "/users"
+    create: version + "/users",
   },
 
   notebooks: {
     allByUser: `${version}/notebooks`,
     index: `${version}/notebooks/:notebook_id`,
     create: `${version}/notebooks`,
-    allVirtualDocs: `${version}/notebooks/:notebook_id/virtual_docs`,
+    allVirtualPapers: `${version}/notebooks/:notebook_id/virtual_papers`,
     test: {
-      index: notebook_id => `${version}/notebooks/${notebook_id}`,
-      allVirtualDocs: notebook_id => `${version}/notebooks/${notebook_id}/virtual_docs`
-    }
+      index: (notebook_id) => `${version}/notebooks/${notebook_id}`,
+      allVirtualPapers: (notebook_id) =>
+        `${version}/notebooks/${notebook_id}/virtual_papers`,
+    },
   },
 
-  virtual_docs: {
-    index: `${version}/virtual_docs/:vDoc_id`,
-    create: `${version}/notebooks/:notebook_id/virtual_docs`,
+  virtual_papers: {
+    index: `${version}/virtual_papers/:vPaper_id`,
+    create: `${version}/notebooks/:notebook_id/virtual_papers`,
     test: {
-      index: vDoc_id => `${version}/virtual_docs/${vDoc_id}`,
-      create: notebook_id => `${version}/notebooks/${notebook_id}/virtual_docs`
-    }
+      index: (vPaper_id) => `${version}/virtual_papers/${vPaper_id}`,
+      create: (notebook_id) =>
+        `${version}/notebooks/${notebook_id}/virtual_papers`,
+    },
   },
 
   boards: {
     create: version + "/boards",
     allByUser: version + "/boards",
-    index: version + "/boards/:user_id"
+    index: version + "/boards/:user_id",
   },
 
   tasks: {
     create: version + "/boards/:board_id/tasks",
-    allByBoard: version + "/boards/:board_id/tasks"
-  }
+    allByBoard: version + "/boards/:board_id/tasks",
+  },
 };
 
 module.exports = ApiRoutes;
