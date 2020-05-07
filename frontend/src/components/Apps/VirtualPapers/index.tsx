@@ -26,14 +26,18 @@ const Notebooks: React.FC<Props> = ({ loadNotebooks, notebooks }) => {
       <h3>Notebooks App</h3>
       <CraftBar />
       <nav className="flex justify-around p-4 border">
-        {notebooks.map(notebook => <NotebookView key={notebook.id} notebook={notebook} />)}
+        {notebooks.map((notebook) => (
+          <NotebookView key={notebook.id} notebook={notebook} />
+        ))}
       </nav>
     </div>
   );
 };
 
 const mapStateToProps = (state: AppState) => ({
-  notebooks: state.virtual_paper.notebooks.data
+  notebooks: state.notebooks.data,
 });
 
-export default connect(mapStateToProps, { loadNotebooks: loadNotebooks })(Notebooks);
+export default connect(mapStateToProps, { loadNotebooks: loadNotebooks })(
+  Notebooks
+);

@@ -1,14 +1,10 @@
-export interface IVirtualDoc {
+export interface IVirtualPaper {
   id: number;
   title: string;
   body: string;
 }
 
-export interface VirtualDocsState {
-  vdocs: IVirtualDoc[];
-}
-
-export enum VirtualDocsTypes {
+export enum VirtualPapersTypes {
   // ACTIONS
   VDOCS_LOADED = "VDOCS_LOADED",
   VDOCS_LOAD_ERROR = "VDOCS_LOAD_ERROR",
@@ -17,5 +13,5 @@ export enum VirtualDocsTypes {
 
   // SAGAS
   LOADING_VDOCS = "LOADING_VDOCS",
-  CREATING_VDOC = "CREATING_VDOCS"
+  CREATING_VDOC = "CREATING_VDOCS",
 }

@@ -1,14 +1,16 @@
 import { action } from "typesafe-actions";
 import { NotebooksActionTypes, INotebook } from "./types";
-import { INotebookRequest } from "../../contracts/Requests/IBookRequest";
+import { INotebookRequest } from "../../contracts/Requests/INoteBookRequest";
 
 // Load
-export const loadNotebooks = () => action(NotebooksActionTypes.LOADING_NOTEBOOKS);
+export const loadNotebooks = () =>
+  action(NotebooksActionTypes.LOADING_NOTEBOOKS);
 
 export const notebooksLoaded = (books: INotebook[]) =>
   action(NotebooksActionTypes.NOTEBOOKS_LOADED, books);
 
-export const notebooksLoadError = () => action(NotebooksActionTypes.NOTEBOOKS_LOAD_ERROR);
+export const notebooksLoadError = () =>
+  action(NotebooksActionTypes.NOTEBOOKS_LOAD_ERROR);
 
 // Create
 export const createNotebook = (book: INotebookRequest) =>
@@ -17,4 +19,5 @@ export const createNotebook = (book: INotebookRequest) =>
 export const notebookCreated = (book: INotebook) =>
   action(NotebooksActionTypes.NOTEBOOK_CREATED, book);
 
-export const notebookCreateError = () => action(NotebooksActionTypes.NOTEBOOK_CREATE_ERROR);
+export const notebookCreateError = () =>
+  action(NotebooksActionTypes.NOTEBOOK_CREATE_ERROR);

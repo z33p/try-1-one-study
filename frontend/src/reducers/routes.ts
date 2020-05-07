@@ -10,32 +10,32 @@ const INITIAL_STATE: RoutesState = {
     users: {
       all: version + "/users",
       index: version + "/users/:user_id",
-      create: version + "/users"
+      create: version + "/users",
     },
 
     notebooks: {
       allByUser: `${version}/notebooks`,
       index: `${version}/notebooks/:notebook_id`,
       create: `${version}/notebooks`,
-      allVirtualDocs: `${version}/notebooks/:notebook_id/virtual_docs`,
+      allVirtualPapers: `${version}/notebooks/:notebook_id/virtual_docs`,
     },
 
     virtual_docs: {
-      index: `${version}/virtual_docs/:vDoc_id`,
+      index: `${version}/virtual_docs/:vPaper_id`,
       create: `${version}/notebooks/:notebook_id/virtual_docs`,
     },
 
     boards: {
       create: version + "/boards",
       allByUser: version + "/boards",
-      index: version + "/boards/:user_id"
+      index: version + "/boards/:user_id",
     },
 
     tasks: {
       create: version + "/boards/:board_id/tasks",
-      allByBoard: version + "/boards/:board_id/tasks"
-    }
-  }
+      allByBoard: version + "/boards/:board_id/tasks",
+    },
+  },
 };
 
 const reducer: Reducer = (state = INITIAL_STATE, action) => {
@@ -43,7 +43,7 @@ const reducer: Reducer = (state = INITIAL_STATE, action) => {
     case RoutesTypes.ROUTES_LOADED:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
 
     default:

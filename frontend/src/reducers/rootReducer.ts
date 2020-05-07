@@ -1,17 +1,14 @@
 import { combineReducers } from "redux";
 
 import auth from "./auth";
-import vdocs from "./vdocs";
+// import papers from "./papers";
 import alert from "./alert";
-import notebooks from "./notebooks"
-import routes from "./routes"
-
-const virtual_paper = combineReducers({notebooks})
+import notebooks from "./notebooks";
+import routes from "./routes";
 
 export default combineReducers({
   auth,
   alert,
-  vdocs,
-  virtual_paper,
-  routes
+  notebooks,
+  routes,
 });

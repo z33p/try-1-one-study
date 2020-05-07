@@ -6,7 +6,7 @@ import { ICredentials } from "../contracts/Requests/IAuthRequest";
 import { AppState } from "../store";
 
 interface StateProps {
-  isAuthenticated: boolean
+  isAuthenticated: boolean;
 }
 
 interface DispatchProps {
@@ -17,12 +17,12 @@ type Props = DispatchProps & StateProps & RouteComponentProps<any>;
 
 const Login: React.FC<Props> = ({ loginUser, isAuthenticated, history }) => {
   useEffect(() => {
-    if (isAuthenticated) history.push("/home/virtual_docs")
-  }, [isAuthenticated, history])
+    if (isAuthenticated) history.push("/home/virtual_papers/1");
+  }, [isAuthenticated, history]);
 
   const credentials: ICredentials = {
     email: "z33p@gmail.com",
-    password: "#Z33333p"
+    password: "#Z33333p",
   };
 
   const [email, setEmail] = useState(credentials.email);
@@ -38,7 +38,7 @@ const Login: React.FC<Props> = ({ loginUser, isAuthenticated, history }) => {
             className="block my-3 p-2 w-64 border focus:border-blue-500 text-center"
             type="email"
             placeholder="USERNAME"
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
           <input
@@ -46,13 +46,13 @@ const Login: React.FC<Props> = ({ loginUser, isAuthenticated, history }) => {
             className="block my-3 p-2 w-64 border focus:border-blue-500 text-center"
             type="password"
             placeholder="PASSWORD"
-            onChange={event => setPassword(event.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
             value={password}
           />
           <div className="w-64 text-right">
             <button
               className="mt-2 bottom-0 right-0 text-white bg-purple-600 hover:bg-purple-500 border hover:border-blue-400"
-              onClick={() => loginUser({ email, password}) }
+              onClick={() => loginUser({ email, password })}
             >
               ENTRAR
             </button>
@@ -64,8 +64,7 @@ const Login: React.FC<Props> = ({ loginUser, isAuthenticated, history }) => {
 };
 
 const mapStateToProps = (state: AppState) => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
 });
-
 
 export default connect(mapStateToProps, { loginUser })(withRouter(Login));
