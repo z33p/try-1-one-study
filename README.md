@@ -1,10 +1,12 @@
 # one-study
 
-<div>
-    <img src="https://img.shields.io/badge/dynamic/json?color=informational&label=React&query=dependencies.react&url=https%3A%2F%2Fraw.githubusercontent.com%2Fz33p%2Fone-study%2Fmaster%2Ffrontend%2Fpackage.json">
-    <img src="https://img.shields.io/badge/dynamic/json?color=sucess&label=Dotenv&query=dependencies.dotenv&url=https%3A%2F%2Fraw.githubusercontent.com%2Fz33p%2Fone-study%2Fmaster%2FwebAPIs%2Furanus%2Fpackage.json">
-    <img src="https://img.shields.io/badge/dynamic/json?color=ff69b4&label=Sequelize&query=dependencies.sequelize&url=https%3A%2F%2Fraw.githubusercontent.com%2Fz33p%2Fone-study%2Fmaster%2FwebAPIs%2Furanus%2Fpackage.json">
-</div>
+<div >
+   <img src="https://img.shields.io/badge/dynamic/json?color=informational&label=React&query=dependencies.react&url=https%3A%2F%2Fraw.githubusercontent.com%2Fz33p%2Fone-study%2Fmaster%2Ffrontend%2Fpackage.json">
+
+   <img src="https://img.shields.io/badge/dynamic/json?color=sucess&label=Dotenv&query=dependencies.dotenv&url=https%3A%2F%2Fraw.githubusercontent.com%2Fz33p%2Fone-study%2Fmaster%2FwebAPIs%2Furanus%2Fpackage.json">
+
+   <img src="https://img.shields.io/badge/dynamic/json?color=ff69b4&label=Sequelize&query=dependencies.sequelize&url=https%3A%2F%2Fraw.githubusercontent.com%2Fz33p%2Fone-study%2Fmaster%2FwebAPIs%2Furanus%2Fpackage.json">
+</div >
 
 ---
 
