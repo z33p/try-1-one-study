@@ -16,7 +16,7 @@ const App: React.FC = () => {
     // Component did mount
     const credentials: ICredentials = {
       email: "z33p@gmail.com",
-      password: "#Z33333p"
+      password: "#Z33333p",
     };
     store.dispatch(loadRoutes());
     if (debug) {

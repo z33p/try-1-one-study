@@ -1,6 +1,7 @@
-sudo rm -r AuthServer/server_data/ FlashCards/server_data/ backend/server_data
+sudo rm -r data
 
 yarn install --cwd frontend
-yarn install --cwd backend
+yarn install --cwd webAPIs/uranus
+cd frontend && yarn build
 
 docker-compose up
