@@ -1,8 +1,8 @@
-import { INotebook } from "../../actions/Notebooks/types";
+import { INotebook } from "../../actions/VirtualPaper/types";
 
 export interface INotebookRequest {
-  title: string,
-  detail?: string
+  title: string;
+  detail?: string;
 }
 export interface IActionNotebook {
   type: string;

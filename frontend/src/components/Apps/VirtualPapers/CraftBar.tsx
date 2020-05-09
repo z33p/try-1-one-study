@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createNotebook } from "../../../actions/Notebooks/index";
+import { createNotebook } from "../../../actions/VirtualPaper/index";
 import { INotebookRequest } from "../../../contracts/Requests/INoteBookRequest";
 
 interface CraftBarProps {}

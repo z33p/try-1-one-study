@@ -23,7 +23,7 @@ export interface INotebook {
   virtual_papers: IVirtualPaper;
 }
 
-export interface NotebooksState {
-  data: INotebook[];
+export interface VirtualPaperState {
+  notebooks: INotebook[];
   isLoading: boolean;
 }

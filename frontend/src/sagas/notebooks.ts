@@ -5,7 +5,7 @@ import {
   notebooksLoadError,
   notebookCreated,
   notebookCreateError,
-} from "../actions/Notebooks/index";
+} from "../actions/VirtualPaper/index";
 import axios from "axios";
 import { IActionNotebook } from "../contracts/Requests/INoteBookRequest";
 import store from "../store";

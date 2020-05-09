@@ -5,14 +5,14 @@ import { AuthState } from "./actions/auth/types";
 import rootReducer from "./reducers/rootReducer";
 import rootSaga from "./sagas/rootSaga";
 import { AlertState } from "./actions/alerts/types";
-import { NotebooksState } from "./actions/Notebooks/types";
-import { RoutesState } from "./actions/routes/types";
+import { VirtualPaperState } from "./actions/VirtualPaper/types";
+import { RouteState } from "./actions/routes/types";
 
 export interface AppState {
   auth: AuthState;
   alert: AlertState;
-  notebooks: NotebooksState;
-  routes: RoutesState;
+  virtual_papers: VirtualPaperState;
+  routes: RouteState;
 }
 
 const sagaMiddleware = createSagaMiddleware();

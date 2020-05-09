@@ -1,26 +1,27 @@
 import {
   NotebooksActionTypes,
-  NotebooksState,
-} from "../actions/Notebooks/types";
+  VirtualPaperState,
+} from "../actions/VirtualPaper/types";
 import { Reducer } from "redux";
 
-const INITIAL_STATE: NotebooksState = {
-  data: [],
+const INITIAL_STATE: VirtualPaperState = {
+  notebooks: [],
   isLoading: false,
 };
 
-const reducer: Reducer<NotebooksState> = (state = INITIAL_STATE, action) => {
+const reducer: Reducer<VirtualPaperState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case NotebooksActionTypes.NOTEBOOKS_LOADED:
       return {
         ...state,
-        data: action.payload,
+        notebooks: action.payload,
+        isLoading: false,
       };
 
     case NotebooksActionTypes.NOTEBOOK_CREATED:
       return {
         ...state,
-        data: [...state.data, action.payload],
+        notebooks: [...state.notebooks, action.payload],
       };
 
     default:

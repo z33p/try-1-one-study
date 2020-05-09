@@ -1,7 +1,7 @@
 import { all, takeLatest, takeEvery } from "redux-saga/effects";
 import { AuthTypes } from "../actions/auth/types";
 import { loadingUser, loggingIn, registering } from "./auth";
-import { NotebooksActionTypes } from "../actions/Notebooks/types";
+import { NotebooksActionTypes } from "../actions/VirtualPaper/types";
 import { creatingNotebook, loadingNotebooks } from "./notebooks";
 import { RoutesTypes } from "../actions/routes/types";
 import { loadingRoutes } from "./routes";
