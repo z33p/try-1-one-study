@@ -1,10 +1,13 @@
 import { IVirtualPaper } from "actions/VirtualPaper/types";
 
 export interface IVirtualPaperRequest {
-  title: string;
-  body?: string;
+  notebookId: number;
+  virtualPaper: { title: string; body?: string };
 }
 export interface IActionVirtualPaper {
   type: string;
-  payload: IVirtualPaper;
+  payload: {
+    notebookId: number;
+    virtualPaper: IVirtualPaper;
+  };
 }

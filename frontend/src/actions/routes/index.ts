@@ -8,4 +8,3 @@ export const routesLoaded = (routes: RoutesState) =>
   action(RoutesTypes.ROUTES_LOADED, routes);
 
 export const routesError = () => action(RoutesTypes.ROUTES_LOAD_ERROR);
-

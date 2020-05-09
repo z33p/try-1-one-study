@@ -6,13 +6,13 @@ import rootReducer from "./reducers/rootReducer";
 import rootSaga from "./sagas/rootSaga";
 import { AlertState } from "./actions/alerts/types";
 import { VirtualPaperState } from "./actions/VirtualPaper/types";
-import { RouteState } from "./actions/routes/types";
+import { RoutesState } from "./actions/routes/types";
 
 export interface AppState {
   auth: AuthState;
   alert: AlertState;
-  virtual_papers: VirtualPaperState;
-  routes: RouteState;
+  virtualPapers: VirtualPaperState;
+  routes: RoutesState;
 }
 
 const sagaMiddleware = createSagaMiddleware();

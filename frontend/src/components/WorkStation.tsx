@@ -5,7 +5,7 @@ import FlashCards from "./Apps/FlashCards/index";
 import TaskBoard from "./Apps/TaskBoard";
 import PrivateRoute from "./common/PrivateRoute.js";
 import AppRoute from "./AppRoute";
-import NotebookView from "./Apps/VirtualPapers/NotebookView";
+import LoadNotebook from "./Apps/VirtualPapers/Notebooks/LoadNotebook";
 
 interface IWorkStationProps {}
 
@@ -32,7 +32,7 @@ const WorkStation: React.FC<IWorkStationProps> = () => {
         />
         <PrivateRoute
           path={AppRoute.WorkStation.EDIT_VIRTUAL_PAPER}
-          component={NotebookView}
+          component={LoadNotebook}
         />
       </Switch>
     </div>
