@@ -6,12 +6,12 @@ import { INotebookRequest } from "../../../contracts/Requests/INoteBookRequest";
 interface CraftBarProps {}
 
 interface DispatchProps {
-  createBook(book: INotebookRequest): void;
+  createNotebook(notebook: INotebookRequest): void;
 }
 
 type Props = CraftBarProps & DispatchProps;
 
-const CraftBar: React.FC<Props> = ({ createBook }) => {
+const CraftBar: React.FC<Props> = ({ createNotebook }) => {
   return (
     <div className="">
       <h3 className="">Craft Bar</h3>
@@ -20,7 +20,7 @@ const CraftBar: React.FC<Props> = ({ createBook }) => {
           className="text-white bg-blue-500"
           onClick={() => {
             let title = prompt("Insira o título do documento?");
-            if (title) createBook({ title });
+            if (title) createNotebook({ title });
           }}
         >
           Create
@@ -30,4 +30,4 @@ const CraftBar: React.FC<Props> = ({ createBook }) => {
   );
 };
 
-export default connect(null, { createBook: createNotebook })(CraftBar);
+export default connect(null, { createNotebook })(CraftBar);
