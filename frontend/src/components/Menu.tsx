@@ -7,7 +7,7 @@ import {
   faClipboardList,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { AppRoute } from "./Main";
+import AppRoute from "./AppRoute";
 
 interface IMenuProps {
   minimized: boolean;
@@ -32,19 +32,19 @@ const Menu: React.FC<IMenuProps> = ({ minimized }) => {
             <i title="Inicio">{icons.home}</i>
           </Link>
           <Link
-            to={AppRoute.VIRTUAL_PAPERS}
+            to={AppRoute.WorkStation.VIRTUAL_PAPERS}
             className="block py-2 hover:bg-gray-200 cursor-pointer"
           >
             <i title="Documentos">{icons.folder}</i>
           </Link>
           <Link
-            to={AppRoute.FLASHCARDS}
+            to={AppRoute.WorkStation.FLASHCARDS}
             className="block py-2 hover:bg-gray-200 cursor-pointer"
           >
             <i title="FlashCards">{icons.stack}</i>
           </Link>
           <Link
-            to={AppRoute.TASKBOARD}
+            to={AppRoute.WorkStation.TASKBOARD}
             className="block py-2 hover:bg-gray-200 cursor-pointer"
           >
             <i title="TaskBoard">{icons.board}</i>
@@ -64,19 +64,19 @@ const Menu: React.FC<IMenuProps> = ({ minimized }) => {
           Inicio
         </Link>
         <Link
-          to={AppRoute.VIRTUAL_PAPERS}
+          to={AppRoute.WorkStation.VIRTUAL_PAPERS}
           className="block py-2 hover:bg-gray-200 cursor-pointer"
         >
           Documentos
         </Link>
         <Link
-          to={AppRoute.FLASHCARDS}
+          to={AppRoute.WorkStation.FLASHCARDS}
           className="block py-2 hover:bg-gray-200 cursor-pointer"
         >
           FlashCards
         </Link>
         <Link
-          to={AppRoute.TASKBOARD}
+          to={AppRoute.WorkStation.TASKBOARD}
           className="block py-2 hover:bg-gray-200 cursor-pointer"
         >
           TaskBoard

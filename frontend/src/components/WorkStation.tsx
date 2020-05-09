@@ -1,17 +1,11 @@
 import React from "react";
 import { Switch } from "react-router-dom";
-import VirtualPapers from "./Apps/VirtualPapers/index";
+import VirtualPapers from "./Apps/VirtualPapers/VirtualPapers";
 import FlashCards from "./Apps/FlashCards/index";
 import TaskBoard from "./Apps/TaskBoard";
 import PrivateRoute from "./common/PrivateRoute.js";
-import EditVirtualPaper from "./Apps/VirtualPapers/ListVirtualPapers";
-
-export enum WorkStationRoute {
-  TASKBOARD = "/home/taskboard/",
-  FLASHCARDS = "/home/flashcards/",
-  VIRTUAL_PAPERS = "/home/virtual_papers/",
-  EDIT_VIRTUAL_PAPER = "/home/virtual_papers/:notebook_id?",
-}
+import AppRoute from "./AppRoute";
+import NotebookView from "./Apps/VirtualPapers/NotebookView";
 
 interface IWorkStationProps {}
 
@@ -23,22 +17,22 @@ const WorkStation: React.FC<IWorkStationProps> = () => {
       <Switch>
         <PrivateRoute
           exact
-          path={WorkStationRoute.TASKBOARD}
+          path={AppRoute.WorkStation.TASKBOARD}
           component={TaskBoard}
         />
         <PrivateRoute
           exact
-          path={WorkStationRoute.FLASHCARDS}
+          path={AppRoute.WorkStation.FLASHCARDS}
           component={FlashCards}
         />
         <PrivateRoute
           exact
-          path={WorkStationRoute.VIRTUAL_PAPERS}
+          path={AppRoute.WorkStation.VIRTUAL_PAPERS}
           component={VirtualPapers}
         />
         <PrivateRoute
-          path={WorkStationRoute.EDIT_VIRTUAL_PAPER}
-          component={EditVirtualPaper}
+          path={AppRoute.WorkStation.EDIT_VIRTUAL_PAPER}
+          component={NotebookView}
         />
       </Switch>
     </div>

@@ -5,14 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Login from "./Login";
-
-export enum AppRoute {
-  HOME = "/home",
-  LOGIN = "/login",
-  VIRTUAL_PAPERS = "/home/virtual_papers",
-  FLASHCARDS = "/home/flashcards",
-  TASKBOARD = "/home/taskboard",
-}
+import AppRoute from "./AppRoute";
 
 const Main: React.FC = () => {
   const icons = {

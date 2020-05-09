@@ -4,6 +4,7 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { ICredentials } from "../contracts/Requests/IAuthRequest";
 import { AppState } from "../store";
+import AppRoute from "./AppRoute";
 
 interface StateProps {
   isAuthenticated: boolean;
@@ -17,7 +18,8 @@ type Props = DispatchProps & StateProps & RouteComponentProps<any>;
 
 const Login: React.FC<Props> = ({ loginUser, isAuthenticated, history }) => {
   useEffect(() => {
-    if (isAuthenticated) history.push("/home/virtual_papers/1");
+    if (isAuthenticated)
+      history.push(AppRoute.WorkStation.VIRTUAL_PAPERS + "/2");
   }, [isAuthenticated, history]);
 
   const credentials: ICredentials = {
