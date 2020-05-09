@@ -1,4 +1,4 @@
-import { IVirtualPaper } from "actions/VirtualPapers/types";
+import { IVirtualPaper } from "actions/Notebooks/types";
 
 export interface IVirtualPaperRequest {
   title: string;

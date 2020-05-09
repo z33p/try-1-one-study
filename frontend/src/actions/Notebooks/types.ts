@@ -1,4 +1,8 @@
-import { IVirtualPaper } from "actions/VirtualPapers/types";
+export interface IVirtualPaper {
+  id: number;
+  title: string;
+  body: string;
+}
 
 export enum NotebooksActionTypes {
   // ACTIONS
