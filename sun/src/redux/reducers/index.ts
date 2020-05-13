@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
+import { AppState } from "../store";
 import auth from "./auth";
 import routes from "./routes";
-import { AppState } from "../store";
+import virtualPapers from "./virtualPapers";
 
-export default combineReducers<AppState>({ auth, routes });
+export default combineReducers<AppState>({ auth, routes, virtualPapers });

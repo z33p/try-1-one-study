@@ -19,7 +19,7 @@ export interface User {
   email: string;
 }
 
-export interface ICredentials {
+export interface Credentials {
   email: string;
   password: string;
 }
@@ -31,7 +31,7 @@ export interface TokensPayload {
 
 export interface AuthAction {
   type: string;
-  payload: ICredentials;
+  payload: Credentials;
 }
 
 export interface AuthState {

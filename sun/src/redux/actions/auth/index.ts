@@ -1,4 +1,4 @@
-import { AuthTypes, User, TokensPayload, ICredentials } from "./types";
+import { AuthTypes, User, TokensPayload, Credentials } from "./types";
 
 export const loadUser = () => ({
   type: AuthTypes.USER_LOADING,
@@ -11,14 +11,14 @@ export function loadSucess(user: User) {
   };
 }
 
-export function loggingIn(credentials: ICredentials) {
+export function loggingIn(credentials: Credentials) {
   return {
     type: AuthTypes.LOGGING_IN,
     payload: credentials,
   };
 }
 
-export function registering(credentials: ICredentials) {
+export function registering(credentials: Credentials) {
   return {
     type: AuthTypes.REGISTERING,
     payload: credentials,
