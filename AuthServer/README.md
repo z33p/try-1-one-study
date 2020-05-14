@@ -1,11 +1,10 @@
 # Auth Server
 
-> This microservice as the name said is a authentication server written in C# powered by JWT
+> This microservice as the name said is a authentication server which uses JWT, server written in C#
 
 ## Main Functionalities
 
-* Login and Register users
-* Serve jwt tokens with user id
-* Serve refresh tokens
-* Logout all users (pending)
-
+[x] Login and Register users
+[x] Serve JWT tokens with user id payload
+[x] Serve refresh tokens
+[ ] Logout all users
