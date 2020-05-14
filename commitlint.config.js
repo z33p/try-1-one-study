@@ -13,11 +13,11 @@ module.exports = {
         "Feat",
         "Fix",
         "Perf",
-        "Refactor",
+        "Refac",
         "Revert",
         "Style",
         "Test",
-        "WIP",
+        "Wip",
       ],
     ],
     "scope-case": [2, "always", "upper-case"],
@@ -25,7 +25,7 @@ module.exports = {
     "scope-enum": [
       2,
       "always",
-      ["AUTHSERVER", "FRONTEND", "NEPTUNE", "URANUS", "K8S", "ROOT"],
+      ["AUTHSERVER", "SUN", "NEPTUNE", "URANUS", "K8S", "ROOT"],
     ],
   },
 };
