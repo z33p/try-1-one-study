@@ -16,7 +16,7 @@ export enum VirtualPapersActionTypes {
 export interface Paper {
   id: number;
   title: string;
-  body: string;
+  body?: string;
 }
 
 export interface ActionPaper {
@@ -29,7 +29,7 @@ export interface ActionPaper {
 
 export interface PaperRequest {
   notebookId: number;
-  paper: { title: string; body?: string };
+  paper: Paper;
 }
 
 export interface Notebook {

@@ -47,13 +47,13 @@ export function createVirtualPaper(payload: PaperRequest) {
   };
 }
 
-export function virtualPaperCreated(payload: PaperRequest) {
+export function paperCreated(payload: PaperRequest) {
   return {
     type: VirtualPapersActionTypes.PAPER_CREATED,
     payload,
   };
 }
 
-export const virtualPaperCreateError = () => ({
+export const paperCreateError = () => ({
   type: VirtualPapersActionTypes.PAPER_CREATE_ERROR,
 });

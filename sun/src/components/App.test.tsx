@@ -4,6 +4,7 @@ import EnzymeAdapter from "enzyme-adapter-react-16";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 import App from "./App";
+import { TextField, Typography } from "@material-ui/core";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
@@ -18,13 +19,18 @@ describe("<App /> unit test", () => {
   it("should add a notebook with given input value as title", () => {
     const wrapper = getWrapper();
 
+    expect(wrapper.find("#no-notebooks").at(0).text()).toEqual("Sem cadernos");
+
     const title = "Hello";
 
-    expect(wrapper.find("input").props().value).toEqual("World");
-
     wrapper.find("input").simulate("change", { target: { value: title } });
-    wrapper.find("button").simulate("click");
 
-    expect(wrapper.find("NotebookView").text()).toEqual(title);
+    expect(wrapper.find("input").props().value).toEqual(title);
+
+    wrapper.find("#addNotebook").at(0).simulate("click");
+
+    const NotebookView = wrapper.find("NotebookView");
+
+    expect(NotebookView.find(Typography).at(0).text()).toEqual(title);
   });
 });

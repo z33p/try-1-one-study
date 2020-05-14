@@ -2,6 +2,7 @@ import { Reducer } from "redux";
 import {
   VirtualPaperState,
   VirtualPapersActionTypes,
+  Notebook,
 } from "../actions/virtualPapers/types";
 
 export const INITIAL_STATE: VirtualPaperState = {
@@ -25,21 +26,18 @@ const reducer: Reducer<VirtualPaperState> = (state = INITIAL_STATE, action) => {
       };
 
     case VirtualPapersActionTypes.PAPER_CREATED:
-      let notebookIndex = state.notebooks.findIndex(
-        (notebook) => notebook.id === action.payload.notebookId
-      );
-
-      let { papers } = state.notebooks[notebookIndex];
-      let notebook = {
-        ...state.notebooks[notebookIndex],
-        virtual_papers: [...papers, action.payload.virtualPaper],
-      };
-
-      state.notebooks[notebookIndex] = notebook;
-
       return {
         ...state,
-        notebooks: [...state.notebooks],
+        notebooks: state.notebooks.map((notebook) => {
+          if (notebook.id === action.payload.notebookId) {
+            const updatedNotebook: Notebook = {
+              ...notebook,
+              papers: [...notebook.papers, action.payload.paper],
+            };
+            return updatedNotebook;
+          }
+          return notebook;
+        }),
       };
 
     default:
