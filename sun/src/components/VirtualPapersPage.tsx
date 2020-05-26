@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Box, Paper, TextField, Button, Typography } from "@material-ui/core";
+import {
+  Box,
+  Paper,
+  TextField,
+  Button,
+  Typography,
+  Grid,
+} from "@material-ui/core";
 import { notebookCreated } from "../redux/actions/virtualPapers";
 import NotebookView from "./NotebookView";
 import { useSelector, useDispatch } from "react-redux";
@@ -24,43 +31,65 @@ const VirtualPapersPage: React.FC = () => {
 
   return (
     <Box p={1}>
-      <Paper elevation={2}>
-        <TextField
-          color="primary"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          onKeyPress={(e) => {
-            if (title.length > 0 && e.key === "Enter") {
-              setId(id + 1);
-              dispatch(notebookCreated(notebook));
-            }
-          }}
-        />
-        <div>
-          <Button
-            id="addNotebook"
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              if (title.length > 0) {
-                setId(id + 1);
-                dispatch(notebookCreated(notebook));
-              }
-            }}
-          >
-            Criar Caderno
-          </Button>
-        </div>
-      </Paper>
-      <Paper elevation={2}>
+      <Box pb={1}>
+        <Paper elevation={2}>
+          <Box p={1}>
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              <Box pb={1}>
+                <TextField
+                  data-testid="inputNotebookTitle"
+                  color="primary"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (title.length > 0 && e.key === "Enter") {
+                      setId(id + 1);
+                      dispatch(notebookCreated(notebook));
+                    }
+                  }}
+                />
+              </Box>
+              <Box pb={1}>
+                <Button
+                  data-testid="addNotebook"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    if (title.length > 0) {
+                      setId(id + 1);
+                      dispatch(notebookCreated(notebook));
+                    }
+                  }}
+                >
+                  Criar Caderno
+                </Button>
+              </Box>
+            </Grid>
+          </Box>
+        </Paper>
+      </Box>
+      <Box pb={1}>
         {notebooks.length === 0 ? (
-          <Typography id="no-notebooks">Sem cadernos</Typography>
+          <Paper elevation={2}>
+            <Box p={1}>
+              <Grid container justify="center">
+                <Typography>Sem cadernos</Typography>
+              </Grid>
+            </Box>
+          </Paper>
         ) : (
           notebooks.map((notebook) => (
-            <NotebookView key={notebook.id} notebook={notebook} />
+            <Box pb={1} key={notebook.id}>
+              <NotebookView notebook={notebook} />
+            </Box>
           ))
         )}
-      </Paper>
+      </Box>
     </Box>
   );
 };
