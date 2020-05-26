@@ -21,16 +21,16 @@ describe("VirtualPapers component tests", () => {
 
     expect(titleInput.nodeName).toEqual("INPUT");
 
-    const title = "Hello World";
+    const textNotebookTitle = "hello";
 
-    expect(titleInput).toHaveValue(title);
+    fireEvent.change(titleInput, { target: { value: textNotebookTitle } });
 
-    const newTitle = "hello";
-
-    fireEvent.change(titleInput, { target: { value: newTitle } });
-
-    expect(titleInput).toHaveValue(newTitle);
+    expect(titleInput).toHaveValue(textNotebookTitle);
 
     fireEvent.click(tree.getByTestId("addNotebook"));
+
+    const notebookTitleList = tree.getAllByTestId("notebookTitle");
+
+    expect(notebookTitleList[0]).toHaveTextContent(textNotebookTitle);
   });
 });

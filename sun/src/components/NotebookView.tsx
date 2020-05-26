@@ -45,7 +45,9 @@ const NotebookView: React.FC<Props> = ({ notebook }) => {
       <Box p={2}>
         <Box pb={1}>
           <Grid container justify="flex-start">
-            <Typography variant="h6">{notebook.title}</Typography>
+            <Typography variant="h6" data-testid="notebookTitle">
+              {notebook.title}
+            </Typography>
             <Typography variant="subtitle1">{notebook.detail}</Typography>
           </Grid>
         </Box>
