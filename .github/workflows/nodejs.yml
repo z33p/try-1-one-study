@@ -8,10 +8,12 @@ on:
     branches: [ develop ]
     paths:
       - 'sun/**'
+      - '.github/workflows/nodejs.yml'
   pull_request:
     branches: [ develop ]
     paths:
       - 'sun/**'
+      - '.github/workflows/nodejs.yml'
 
 jobs:
   build:
@@ -28,6 +30,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn install --frozen-lockfile
-    - run: yarn build --if-present
-    - run: yarn test
+    - name: yarn install, build and test
+      working-directory: 'sun'
+      run: |
+        yarn install --frozen-lockfile
+        yarn build --if-present
+        run: yarn test
