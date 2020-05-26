@@ -30,9 +30,17 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: yarn install, build and test
+
+    - name: instaling dependencies
       working-directory: 'sun'
-      run: |
-        yarn install --frozen-lockfile
-        yarn build --if-present
-        run: yarn test
+      run: yarn install --frozen-lockfile
+      
+    - name: building
+      working-directory: 'sun'
+      run: yarn build --if-present
+      
+    - name: testing
+      working-directory: 'sun'
+      run: yarn test
+      
+
