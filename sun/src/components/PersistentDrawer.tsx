@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PersistentDrawerLeft: React.FC = () => {
+const PersistentDrawer: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -155,8 +155,15 @@ const PersistentDrawerLeft: React.FC = () => {
           ))}
         </List>
       </Drawer>
+      <div
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        <div className={classes.drawerHeader} />
+      </div>
     </div>
   );
 };
 
-export default PersistentDrawerLeft;
+export default PersistentDrawer;
