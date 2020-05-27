@@ -159,9 +159,7 @@ const PersistentDrawer: React.FC = () => {
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
-      >
-        <div className={classes.drawerHeader} />
-      </div>
+      ></div>
     </div>
   );
 };
