@@ -17,7 +17,7 @@ describe("VirtualPapers component tests", () => {
       ?.firstChild;
 
     if (!titleInput)
-      throw Error(`${varNameToString(titleInput)} is undefined or null`);
+      throw Error(`${varNameToString({ titleInput })} is undefined or null`);
 
     expect(titleInput.nodeName).toEqual("INPUT");
 
