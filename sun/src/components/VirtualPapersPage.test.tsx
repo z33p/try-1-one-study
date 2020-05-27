@@ -3,7 +3,6 @@ import { Provider as ReduxProvider } from "react-redux";
 import store from "../redux/store";
 import VirtualPapersPage from "./VirtualPapersPage";
 import { render, fireEvent } from "@testing-library/react";
-import { varNameToString } from "./helpers";
 
 describe("VirtualPapers component tests", () => {
   it("should add a notebook with given input value as title", () => {
@@ -13,11 +12,7 @@ describe("VirtualPapers component tests", () => {
       </ReduxProvider>
     );
 
-    const titleInput = tree.getByTestId("inputNotebookTitle")?.firstChild
-      ?.firstChild;
-
-    if (!titleInput)
-      throw Error(`${varNameToString({ titleInput })} is undefined or null`);
+    const titleInput = tree.getByTestId("inputNotebookTitle");
 
     expect(titleInput.nodeName).toEqual("INPUT");
 

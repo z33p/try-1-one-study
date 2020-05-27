@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import {
   Box,
   Paper,
-  TextField,
   Button,
   Typography,
   Grid,
+  Input,
+  InputBaseComponentProps,
 } from "@material-ui/core";
 import { notebookCreated } from "../redux/actions/virtualPapers";
 import NotebookView from "./NotebookView";
@@ -41,8 +42,12 @@ const VirtualPapersPage: React.FC = () => {
               alignItems="center"
             >
               <Box pb={1}>
-                <TextField
-                  data-testid="inputNotebookTitle"
+                <Input
+                  inputProps={
+                    {
+                      "data-testid": "inputNotebookTitle",
+                    } as InputBaseComponentProps
+                  }
                   color="primary"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
