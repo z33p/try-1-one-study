@@ -31,71 +31,75 @@ const VirtualPapersPage: React.FC = () => {
   };
 
   return (
-    <Box p={1}>
-      <Box pb={1}>
-        <Paper elevation={2}>
-          <Box p={1}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-            >
-              <Box pb={1}>
-                <Input
-                  inputProps={
-                    {
-                      "data-testid": "inputNotebookTitle",
-                    } as InputBaseComponentProps
-                  }
-                  color="primary"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  onKeyPress={(e) => {
-                    if (title.length > 0 && e.key === "Enter") {
-                      setId(id + 1);
-                      dispatch(notebookCreated(notebook));
-                    }
-                  }}
-                />
-              </Box>
-              <Box pb={1}>
-                <Button
-                  data-testid="addNotebook"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    if (title.length > 0) {
-                      setId(id + 1);
-                      dispatch(notebookCreated(notebook));
-                    }
-                  }}
+    <Grid container direction="column" justify="space-evenly">
+      <Box p={1}>
+        <Grid container spacing={1} direction="column">
+          <Grid item>
+            <Paper elevation={2}>
+              <Box p={1}>
+                <Grid
+                  container
+                  direction="column"
+                  justify="center"
+                  alignItems="center"
                 >
-                  Criar Caderno
-                </Button>
+                  <Box pb={1}>
+                    <Input
+                      inputProps={
+                        {
+                          "data-testid": "inputNotebookTitle",
+                        } as InputBaseComponentProps
+                      }
+                      color="primary"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      onKeyPress={(e) => {
+                        if (title.length > 0 && e.key === "Enter") {
+                          setId(id + 1);
+                          dispatch(notebookCreated(notebook));
+                        }
+                      }}
+                    />
+                  </Box>
+                  <Box pb={1}>
+                    <Button
+                      data-testid="addNotebook"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => {
+                        if (title.length > 0) {
+                          setId(id + 1);
+                          dispatch(notebookCreated(notebook));
+                        }
+                      }}
+                    >
+                      Criar Caderno
+                    </Button>
+                  </Box>
+                </Grid>
               </Box>
-            </Grid>
-          </Box>
-        </Paper>
+            </Paper>
+          </Grid>
+          <Grid item>
+            {notebooks.length === 0 ? (
+              <Paper elevation={2}>
+                <Box p={1}>
+                  <Grid container justify="center">
+                    <Typography>Sem cadernos</Typography>
+                  </Grid>
+                </Box>
+              </Paper>
+            ) : (
+              notebooks.map((notebook) => (
+                <Box pb={1} key={notebook.id}>
+                  <NotebookView notebook={notebook} />
+                </Box>
+              ))
+            )}
+          </Grid>
+        </Grid>
       </Box>
-      <Box pb={1}>
-        {notebooks.length === 0 ? (
-          <Paper elevation={2}>
-            <Box p={1}>
-              <Grid container justify="center">
-                <Typography>Sem cadernos</Typography>
-              </Grid>
-            </Box>
-          </Paper>
-        ) : (
-          notebooks.map((notebook) => (
-            <Box pb={1} key={notebook.id}>
-              <NotebookView notebook={notebook} />
-            </Box>
-          ))
-        )}
-      </Box>
-    </Box>
+    </Grid>
   );
 };
 

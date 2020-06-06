@@ -3,7 +3,7 @@ import { AuthState, AuthTypes } from "../actions/auth/types";
 
 export const INITIAL_STATE: AuthState = {
   isLoading: false,
-  isAuthenticated: false,
+  isAuthenticated: true,
   token: localStorage.getItem("token"),
   refreshToken: localStorage.getItem("refreshToken"),
   user: null,
