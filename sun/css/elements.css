@@ -1,0 +1,21 @@
+h1 {
+  @apply py-4;
+  @apply text-5xl;
+  @apply font-semibold;
+}
+
+h2 {
+  @apply py-1;
+  @apply text-4xl;
+  @apply font-semibold;
+}
+
+h3 {
+  @apply py-1;
+  @apply text-3xl;
+  @apply font-semibold;
+}
+
+a:hover {
+  @apply underline;
+}
