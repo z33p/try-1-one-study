@@ -1,16 +1,15 @@
 import React from "react";
-import Link from "next/link";
 import Nav from "@components/Nav";
 
-const Home: React.FC = () => {
+const Login: React.FC = () => {
   return (
-    <div className="">
+    <div>
       <Nav />
       <div className="p-4">
-        <h1>Home Page</h1>
+        <h1>Login Page</h1>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Login;
